@@ -4,7 +4,7 @@ const Footer = () => {
   return (
     <div>
         
-      <footer className="footer xl:px-24 py-10 px-4 bg-[#F9D9A5] text-base ">
+      <footer className="footer xl:px-24 py-10 px-4 bg-[#1B4A7B] text-base ">
         <aside>
       
         <img src='/logo.jpg' alt='PAWFECT Logo' width="100" height="auto" className="rounded-full" />
@@ -32,7 +32,7 @@ const Footer = () => {
 
       <hr />
 
-      <footer className="footer items-center xl:px-24 py-10 px-4 bg-[#F9D9A5]">
+      <footer className="footer items-center xl:px-24 py-10 px-4 bg-[#1B4A7B]">
         <aside className="items-center grid-flow-col"> 
           <p>Copyright © 2024 - All rights reserved by PAWFECT</p>
         </aside> 

@@ -3,6 +3,9 @@ import Main from "../layout/Main";
 import Home from "../pages/home/Home";
 import PawFectReservationForm from "../pages/Reseverstion/PawFectReservationForm";
 import Profile from "../pages/profile";
+import RegisterForm from "../components/RegisterForm";
+import SignIn from "../components/SignIn";
+
 const router = createBrowserRouter([
     {
       path: "/",
@@ -11,9 +14,18 @@ const router = createBrowserRouter([
         {
             path: "/",
             element: <Home/>
-        },{
+        },
+        {
           path:"/booknow",
           element:<PawFectReservationForm/>
+        },
+        {
+           path:"/signin",
+          element:<SignIn/>
+        },
+        {
+          path:"/registerform",
+          element:<RegisterForm/>
         },
         {
           path:"/profile",
