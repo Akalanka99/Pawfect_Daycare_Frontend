@@ -62,11 +62,11 @@ const SignIn = () => {
     
 
     
-    // <div className="flex justify-center items-center min-h-screen bg-orange-50">
-      <div className="flex  rounded-lg shadow-md overflow-hidden "style={{ backgroundColor: '#FFEFE0', width: '600', height: '100' }}>
+    <div className="flex justify-center items-center min-h-screen">
+      {/* <div className="flex  rounded-lg shadow-md overflow-hidden bg- "> */}
         
         {/* Left side - Form */}
-        <div className="p-8 w-80  ">
+        <div className="p-8 w-80  bg-[#58B5C6] ">
           <h2 className="text-2xl font-bold mb-6">Sign In</h2>
           <form>
             <div className="mb-4 relative  ">

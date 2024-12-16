@@ -5,6 +5,7 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   
+  
   plugins: [require('daisyui'),],
 }
 

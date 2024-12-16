@@ -62,8 +62,8 @@ const RegisterForm = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-orange-50">
-      <div className="flex  rounded-lg shadow-md overflow-hidden ">
+    <div className="flex justify-center items-center min-h-screen ">
+      <div className="flex  rounded-lg shadow-md overflow-hidden bg-[#58B5C6] ">
         
         {/* Left side - Form */}
         <div className="p-8 w-80  ">
@@ -121,7 +121,7 @@ const RegisterForm = () => {
           <button
             type="button"
             onClick={handleSubmit}
-            className="w-full bg-orange-500 text-white py-2 rounded-md hover:bg-orange-600 transition duration-300"
+            className="w-full bg-[#1B4A7B] text-white py-2 rounded-md hover:bg-orange-600 transition duration-300"
           >
             Register
           </button>
@@ -135,7 +135,7 @@ const RegisterForm = () => {
 
 
         </div>
-        // </div>
+       </div>
   );
 };
 
