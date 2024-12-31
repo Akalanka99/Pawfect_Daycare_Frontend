@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import DogModal1 from "./ModelsforPopUps/Dog/DogModal1";
 import { Calendar } from "lucide-react";
 
 const InputField = ({ label, ...props }) => (
@@ -9,12 +10,23 @@ const InputField = ({ label, ...props }) => (
 );
 
 const PawFectReservationForm = () => {
-  const [agreeTerms, setAgreeTerms] = useState(false);
+  // const [agreeTerms, setAgreeTerms] = useState(false);
   const [petCategory, setPetCategory] = useState("");
+  const [showDogModal1, setShowDogModal1] = useState(false);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Form submitted");
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   console.log("Form submitted");
+  // };
+
+  const handleShowModal = () => {
+    if (petCategory === "dog") {
+      setShowDogModal1(true); // Show modal if pet category is dog
+    } else if (petCategory === "cat") {
+      setShowCatModal1(true); // Show modal if pet category is cat
+    } else {
+      alert("Please select a pet category to see available slots.");
+    }
   };
 
   return (
@@ -26,7 +38,7 @@ const PawFectReservationForm = () => {
         Fill in your pet's details, and we'll make sure they have a paw-some
         stay!
       </p>
-      <form onSubmit={handleSubmit}>
+      <form>
         <InputField label="Owner's Name" type="text" required />
         <InputField label="E-mail Address" type="email" required />
         <InputField label="Home Address" type="text" required />
@@ -77,24 +89,20 @@ const PawFectReservationForm = () => {
           </>
         )}
 
-        <InputField label=" Dog’s Name" type="text" />
-        <InputField label=" Dog’s Breed" type="text" />
-        <InputField label=" Cat’s Name" type="text" />
-        <InputField label=" Cat’s Breed" type="text" />
-        <InputField label="Age" type="number" />       
-                
-        
-
-        
+        <InputField label="Age" type="number" />
 
         <button
-          type="Available  Slots"
+          type="button"
           className="w-full bg-[#1B4A7B] text-white py-2 px-4 rounded hover:bg-[#58B5C6] transition duration-300"
-          disabled={!agreeTerms}
+          // disabled={!agreeTerms}
+          onClick={handleShowModal}
         >
-          Available  Slots
+          Available Slots
         </button>
       </form>
+
+      {/* Modal */}
+      {showDogModal1 && <DogModal1 onclose={() => setShowDogModal1(false)} />}
     </div>
   );
 };
