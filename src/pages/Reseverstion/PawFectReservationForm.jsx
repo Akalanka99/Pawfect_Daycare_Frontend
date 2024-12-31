@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import DogModal1 from "./ModelsforPopUps/Dog/DogModal1";
-import { Calendar } from "lucide-react";
+import CatModal1 from "./ModelsforPopUps/Cat/CatModal1";
+// import { Calendar } from "lucide-react";
 
 const InputField = ({ label, ...props }) => (
   <div className="mb-4 flex justify-between items-center">
@@ -13,6 +14,7 @@ const PawFectReservationForm = () => {
   // const [agreeTerms, setAgreeTerms] = useState(false);
   const [petCategory, setPetCategory] = useState("");
   const [showDogModal1, setShowDogModal1] = useState(false);
+  const [showCatModal1, setShowCatModal1] = useState(false);
 
   // const handleSubmit = (e) => {
   //   e.preventDefault();
@@ -103,6 +105,7 @@ const PawFectReservationForm = () => {
 
       {/* Modal */}
       {showDogModal1 && <DogModal1 onclose={() => setShowDogModal1(false)} />}
+      {showCatModal1 && <CatModal1 onclose={() => setShowCatModal1(false)} />}
     </div>
   );
 };
