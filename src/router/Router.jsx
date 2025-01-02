@@ -5,6 +5,7 @@ import PawFectReservationForm from "../pages/Reseverstion/PawFectReservationForm
 import Profile from "../pages/profile";
 import RegisterForm from "../components/RegisterForm";
 import SignIn from "../components/SignIn";
+import Logout from "../components/Logout";
 
 const router = createBrowserRouter([
     {
@@ -30,7 +31,11 @@ const router = createBrowserRouter([
         {
           path:"/profile",
           element:<Profile/>
-        }
+        },
+        {
+          path:"/logout",
+          element:<Logout/>
+        },
 
       ]
     },
