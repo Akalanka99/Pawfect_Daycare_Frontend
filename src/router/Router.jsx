@@ -6,6 +6,7 @@ import Profile from "../pages/profile";
 import RegisterForm from "../components/RegisterForm";
 import SignIn from "../components/SignIn";
 
+
 const router = createBrowserRouter([
     {
       path: "/",
@@ -30,7 +31,8 @@ const router = createBrowserRouter([
         {
           path:"/profile",
           element:<Profile/>
-        }
+        },
+        
 
       ]
     },
