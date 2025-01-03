@@ -5,6 +5,7 @@ import PawFectReservationForm from "../pages/Reseverstion/PawFectReservationForm
 import Profile from "../pages/profile";
 import RegisterForm from "../components/RegisterForm";
 import SignIn from "../components/SignIn";
+import AboutUs from "../pages/AboutUs";
 
 
 const router = createBrowserRouter([
@@ -17,7 +18,7 @@ const router = createBrowserRouter([
             element: <Home/>
         },
         {
-          path:"/booknow",
+          path:"/bookingnow",
           element:<PawFectReservationForm/>
         },
         {
@@ -28,6 +29,11 @@ const router = createBrowserRouter([
           path:"/registerform",
           element:<RegisterForm/>
         },
+        {
+          path:"/aboutus",
+          element:<AboutUs/>
+        },
+       
         {
           path:"/profile",
           element:<Profile/>
