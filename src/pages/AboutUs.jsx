@@ -4,7 +4,7 @@ import {
   faFacebook,
   faInstagram,
   faTwitter,
-} from "@fortawesome/free-brands-svg-icons";
+}from "@fortawesome/free-brands-svg-icons"; 
 import ServicesImage from "../assets/AboutUs/Services.jpg";
 import Gallery_1 from "../assets/AboutUs/Gallery_1.jpg";
 import Gallery_2 from "../assets/AboutUs/Gallery_2.jpg";

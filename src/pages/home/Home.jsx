@@ -7,12 +7,12 @@ function Home() {
       <Banner/>
       
       {/* Services Heading */}
-      <div className='text-2xl text-left uppercase font-bold mb-12 bg-#1B4A7B text-center' >
+      <div className='text-2xl text-left uppercase font-bold mb-12 text-[#1B4A7B] text-center mt-16' >
         Services
       </div>
 
       {/* Services Boxes */}
-      <div className='flex flex-col md:flex-row gap-10 px-3'>
+      <div className='flex flex-col md:flex-row gap-10 px-3 justify-center items-center '>
         {/* Service Box 1 */}
         <div className='flex flex-col items-center bg-[#F1FBFD] shadow-lg p-6 rounded-lg'>
           
@@ -23,7 +23,7 @@ function Home() {
 
         {/* Service Box 2 */}
         <div className='flex flex-col items-center bg-[#F1FBFD] shadow-lg p-6 rounded-lg'>
-          <img src="dog-boarding.png" alt="Dog Boarding" className='w-24 h-24 mb-4' />
+          {/* //<img src="dog-boarding.png" alt="Dog Boarding" className='w-24 h-24 mb-4' /> */}
           <h3 className='text-lg font-semibold mb-2'>Dog Boarding</h3>
           <p className='text-center mb-4'>A safe and comfortable place where your dog can stay and be cared for while you're away.</p>
           <button className='bg-[#1B4A7B] px-4 py-2 text-white rounded-full'>View More</button>
@@ -31,7 +31,7 @@ function Home() {
 
         {/* Service Box 3 */}
         <div className='flex flex-col items-center bg-[#F1FBFD] shadow-lg p-6 rounded-lg'>
-          <img src="pet-grooming.png" alt="Pet Grooming" className='w-24 h-24 mb-4' />
+          {/* <img src="pet-grooming.png" alt="Pet Grooming" className='w-24 h-24 mb-4' /> */}
           <h3 className='text-lg font-semibold mb-2'>Pet Grooming</h3>
           <p className='text-center mb-4'>A professional service to keep your pet clean, healthy, and looking their best.</p>
           <button className='bg-[#1B4A7B] px-4 py-2 text-white rounded-full'>View More</button>
@@ -41,7 +41,7 @@ function Home() {
       {/* Pet Care Tips Section */}
       <div className='mt-16'>
         {/* Pet Care Tips Heading */}
-        <div className='text-2xl text-left uppercase font-bold mb-8' >
+        <div className='text-2xl text-left uppercase font-bold mb-8 text-center text-[#1B4A7B]' >
           Pet Care Tips
         </div>
 
