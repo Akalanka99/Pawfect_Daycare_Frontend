@@ -1,14 +1,18 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const SingleDayDogModal = ({ onClose, onSave }) => {
   const [selectedDate, setSelectedDate] = useState("");
   const [selectedTime, setSelectedTime] = useState("");
   const [isHalfDay, setIsHalfDay] = useState(false);
+  const navigate = useNavigate();
 
-  const handleSave = () => {
+  const handleNext = () => {
     if (selectedDate && (selectedTime || !isHalfDay)) {
-      onSave({ date: selectedDate, time: selectedTime });
-      onClose();
+      // Redirect to the next page with state
+      navigate("/single-schedule", {
+        state: { date: selectedDate, time: selectedTime },
+      });
     } else {
       alert("Please select a date and time.");
     }
@@ -108,7 +112,7 @@ const SingleDayDogModal = ({ onClose, onSave }) => {
             Back
           </button>
           <button
-            onClick={handleSave}
+            onClick={handleNext}
             className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
           >
             Next
