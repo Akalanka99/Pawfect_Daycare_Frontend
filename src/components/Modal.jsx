@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { UserCheck } from 'react-feather';
 import { useNavigate } from 'react-router-dom';
 import {
-  getAuth,
   signInWithEmailAndPassword,
   signInWithPopup,
-  signOut,
   GoogleAuthProvider,
   onAuthStateChanged,
 } from 'firebase/auth';
@@ -17,24 +15,30 @@ const SignInModal = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const toast = useToast();
+  const modalRef = useRef(null);
 
   // Monitor Authentication State
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      if (currentUser) {
-        setUser(currentUser);
-      } else {
-        setUser(null);
-      }
+      setUser(currentUser || null);
     });
     return () => unsubscribe();
   }, []);
 
+  // Close Modal Function
+  const closeModal = () => {
+    if (modalRef.current) {
+      modalRef.current.close();
+    }
+  };
+
   // Handle Email and Password Login
   const handleLogin = async (event) => {
     event.preventDefault();
+    setError('');
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
@@ -56,7 +60,7 @@ const SignInModal = () => {
           </div>
         </div>
       );
-
+      closeModal();
       navigate('/', { replace: true });
     } catch (error) {
       setError(error.message);
@@ -74,6 +78,7 @@ const SignInModal = () => {
 
   // Handle Google Login
   const handleGoogle = async () => {
+    setLoading(true);
     const provider = new GoogleAuthProvider();
     try {
       const result = await signInWithPopup(auth, provider);
@@ -96,7 +101,7 @@ const SignInModal = () => {
           </div>
         </div>
       );
-
+      closeModal();
       navigate('/');
     } catch (error) {
       setError(error.message);
@@ -109,46 +114,18 @@ const SignInModal = () => {
           </div>
         </div>
       );
-    }
-  };
-
-  // Handle Logout
-  const handleLogout = async () => {
-    try {
-      await signOut(auth);
-      localStorage.removeItem('auth');
-      toast.open(
-        <div className="flex gap-2 bg-green-400 text-green-800 p-4 rounded-lg shadow-lg">
-          <UserCheck size={40} />
-          <div>
-            <h3 className="font-bold">Logged Out</h3>
-            <p className="text-sm">You have been logged out successfully</p>
-          </div>
-        </div>
-      );
-      setUser(null);
-      navigate('/'); // Optional: Redirect after logout
-    } catch (error) {
-      setError(error.message);
-      toast.open(
-        <div className="flex gap-2 bg-red-400 text-red-800 p-4 rounded-lg shadow-lg">
-          <UserCheck size={40} />
-          <div>
-            <h3 className="font-bold">Error</h3>
-            <p className="text-sm">Failed to log out</p>
-          </div>
-        </div>
-      );
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <dialog id="my_modal_5" className="modal modal-middle sm:modal-middle">
+    <dialog ref={modalRef} id="my_modal_5" className="modal modal-middle sm:modal-middle">
       <div className="modal-box p-0 rounded-lg overflow-hidden">
         <div className="flex">
           {/* Left Side - Form */}
           <div className="w-1/2 p-8 bg-white">
-            {!user ? (
+            {!user && (
               <>
                 <h2 className="text-2xl font-bold mb-6 text-center">Sign In</h2>
                 <form onSubmit={handleLogin}>
@@ -184,7 +161,7 @@ const SignInModal = () => {
                   Don’t have an account?{' '}
                   <span
                     onClick={() => {
-                      document.getElementById('my_modal_5').close();
+                      closeModal();
                       navigate('/registerform');
                     }}
                     className="text-blue-500 ml-1 cursor-pointer hover:underline"
@@ -195,42 +172,21 @@ const SignInModal = () => {
                 <button
                   type="button"
                   onClick={handleGoogle}
+                  disabled={loading}
                   className="w-full bg-red-500 text-white py-2 rounded-md mt-4 hover:bg-red-600 transition duration-300"
                 >
-                  Sign in with Google
+                  {loading ? "Signing in..." : "Sign in with Google"}
                 </button>
               </>
-            ) : (
-              <div className="text-center">
-                <h2 className="text-2xl font-bold mb-6">Welcome, {user.displayName || user.email}</h2>
-                <button
-                  type="button"
-                  onClick={handleLogout}
-                  className="w-full bg-red-500 text-white py-2 rounded-md mt-4 hover:bg-red-600 transition duration-300"
-                >
-                  Logout
-                </button>
-              </div>
             )}
           </div>
-
           {/* Right Side - Image */}
           <div className="w-1/2 bg-cyan-50 flex items-center justify-center">
-            <img
-              src="rectangle28.png"
-              alt="Illustration"
-              className="w-full h-full object-cover"
-            />
+            <img src="rectangle28.png" alt="Illustration" className="w-full h-full object-cover" />
           </div>
         </div>
-
         {/* Close Button */}
-        <button
-          onClick={() => document.getElementById('my_modal_5').close()}
-          className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-        >
-          ✕
-        </button>
+        <button onClick={closeModal} className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
       </div>
     </dialog>
   );

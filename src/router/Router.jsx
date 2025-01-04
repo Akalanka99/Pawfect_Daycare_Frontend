@@ -2,7 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Main from "../layout/Main";
 import Home from "../pages/home/Home";
 import PawFectReservationForm from "../pages/Reseverstion/PawFectReservationForm";
-import Profile from "../pages/profile";
+import Profile from "../components/Profile";
 import RegisterForm from "../components/RegisterForm";
 import SignIn from "../components/SignIn";
 import AboutUs from "../pages/AboutUs";
@@ -30,7 +30,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/registerform",
-        element: <RegisterForm />,
+        element: <RegisterForm/>,
       },
       {
         path: "/aboutus",
