@@ -1,18 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-const BookingSlotMultipleDay = () => {
+const BookingSlot = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { startDate, endDate } = location.state || {};
+  const { startDate, endDate, date, time } = location.state || {};
 
-  const [selectedStartDate, setSelectedStartDate] = useState(startDate || "");
-  const [selectedEndDate, setSelectedEndDate] = useState(endDate || "");
+  const [isMultipleDay, setIsMultipleDay] = useState(!!startDate && !!endDate);
+  const [selectedStartDate, setSelectedStartDate] = useState(
+    startDate || date || new Date().toISOString().substring(0, 10)
+  );
+  const [selectedEndDate, setSelectedEndDate] = useState(
+    endDate || selectedStartDate
+  );
   const [currentMonth, setCurrentMonth] = useState(
-    new Date(selectedStartDate || Date.now()).getMonth()
+    new Date(selectedStartDate).getMonth()
   );
   const [currentYear, setCurrentYear] = useState(
-    new Date(selectedStartDate || Date.now()).getFullYear()
+    new Date(selectedStartDate).getFullYear()
   );
   const [cages, setCages] = useState([]);
   const [selectedCages, setSelectedCages] = useState({});
@@ -54,12 +59,11 @@ const BookingSlotMultipleDay = () => {
       ([cageId, slots]) => ({
         cageId: parseInt(cageId, 10),
         startDate: selectedStartDate,
-        endDate: selectedEndDate,
+        endDate: isMultipleDay ? selectedEndDate : selectedStartDate,
         morning: slots.morning,
         afternoon: slots.afternoon,
       })
     );
-
     console.log("Booking Data:", bookingData);
     alert("Booking confirmed. Data logged to the console.");
   };
@@ -141,6 +145,11 @@ const BookingSlotMultipleDay = () => {
                     ? "bg-blue-500 text-white"
                     : "bg-gray-200"
                 }`}
+                onClick={() =>
+                  setIsMultipleDay
+                    ? setSelectedStartDate(fullDate)
+                    : setSelectedStartDate(fullDate)
+                }
               >
                 {i + 1}
               </button>
@@ -217,4 +226,4 @@ const BookingSlotMultipleDay = () => {
   );
 };
 
-export default BookingSlotMultipleDay;
+export default BookingSlot;
