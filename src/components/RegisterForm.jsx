@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Link, useLocation, useNavigate, Navigate } from 'react-router-dom';
-import { AuthContext } from './contects/Authprovider';
+import { AuthContext } from './context/Authprovider';
 import { useGetUserInfo } from '../pages/hooks/useGetUserInfo';
 
 const RegisterForm = () => {
@@ -124,7 +124,7 @@ const RegisterForm = () => {
           <div className="mt-4">
             <p>
               Already have an account?{' '}
-              <Link to="/login" className="text-orange-500">
+              <Link to="/signin" className="text-orange-500">
                 Login here
               </Link>
             </p>
