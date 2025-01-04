@@ -49,7 +49,7 @@ const RegisterForm = () => {
         };
         localStorage.setItem('auth', JSON.stringify(authInfo));
         alert('Login successfully!');
-        navigate('/booknow');
+        navigate('/');
       })
       .catch((error) => {
         const errorMessage = error.message;

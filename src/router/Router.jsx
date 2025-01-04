@@ -2,17 +2,17 @@ import { createBrowserRouter } from "react-router-dom";
 import Main from "../layout/Main";
 import Home from "../pages/home/Home";
 import PawFectReservationForm from "../pages/Reseverstion/PawFectReservationForm";
-import Profile from "../pages/profile";
+//import Profile from "../pages/profile";
 import RegisterForm from "../components/RegisterForm";
 import SignIn from "../components/SignIn";
 import AboutUs from "../pages/AboutUs";
 import BookingModal from "../pages/Reseverstion/BookingModal";
 import BookingSlot from "../pages/Reseverstion/BookingSlot";
-import ProfilePage from "../pages/profile/ProfilePage";
-import PetInfo from "../pages/profile/PetInfo";
-import BookingHistory from "../pages/profile/BookingHistory";
-import PaymentPage from "../pages/Payment/PaymentPage";
-import ViewPayment from "../pages/Payment/ViewPayment";
+// import ProfilePage from "../pages/profile/ProfilePage";
+// import PetInfo from "../pages/profile/PetInfo";
+// import BookingHistory from "../pages/profile/BookingHistory";
+// import PaymentPage from "../pages/Payment/PaymentPage";
+
 
 const router = createBrowserRouter([
   {
@@ -40,10 +40,10 @@ const router = createBrowserRouter([
         element: <AboutUs />,
       },
 
-      {
-        path: "/profile",
-        element: <Profile />,
-      },
+      // {
+      //   path: "/profile",
+      //   element: <Profile />,
+      // },
       {
         path: "/booking-dog",
         element: <BookingModal animalType="dog" onClose={() => {}} />, // Pass "dog" as animalType
@@ -56,27 +56,23 @@ const router = createBrowserRouter([
         path: "/booking-slot",
         element: <BookingSlot />,
       },
-      {
-        path:"/profile",
-        element:<ProfilePage/>
-      },
-      {
-        path:"/petinfo",
-        element:<PetInfo/>
-      },
-      {
-        path:"/bookinghistory",
-        element:<BookingHistory/>
-      },
-      {
-        path:"/payment",
-        element:<PaymentPage/>
-      },
-      {
-        path:"/viewpayment",
-        element:<ViewPayment/>
-      },
-
+      // {
+      //   path:"/profile",
+      //   element:<ProfilePage/>
+      // },
+      // {
+      //   path:"/petinfo",
+      //   element:<PetInfo/>
+      // },
+      // {
+      //   path:"/bookinghistory",
+      //   element:<BookingHistory/>
+      // },
+      // {
+      //   path:"/payment",
+      //   element:<PaymentPage/>
+      // },
+      
 
     ],
   },
