@@ -1,13 +1,16 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const MultipleDayDogModal = ({ onClose, onSave }) => {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
+  const navigate = useNavigate();
 
-  const handleSave = () => {
+  const handleNext = () => {
     if (startDate && endDate) {
-      onSave({ startDate, endDate });
-      onClose();
+      navigate("/multiple-schedule", {
+        state: { startDate, endDate },
+      });
     } else {
       alert("Please select both start and end dates.");
     }
@@ -47,7 +50,7 @@ const MultipleDayDogModal = ({ onClose, onSave }) => {
               Back
             </button>
             <button
-              onClick={handleSave}
+              onClick={handleNext}
               className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
             >
               Next
