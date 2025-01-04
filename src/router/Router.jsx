@@ -8,6 +8,11 @@ import SignIn from "../components/SignIn";
 import AboutUs from "../pages/AboutUs";
 import BookingModal from "../pages/Reseverstion/BookingModal";
 import BookingSlot from "../pages/Reseverstion/BookingSlot";
+import ProfilePage from "../pages/profile/ProfilePage";
+import PetInfo from "../pages/profile/PetInfo";
+import BookingHistory from "../pages/profile/BookingHistory";
+import PaymentPage from "../pages/Payment/PaymentPage";
+import ViewPayment from "../pages/Payment/ViewPayment";
 
 const router = createBrowserRouter([
   {
@@ -51,6 +56,28 @@ const router = createBrowserRouter([
         path: "/booking-slot",
         element: <BookingSlot />,
       },
+      {
+        path:"/profile",
+        element:<ProfilePage/>
+      },
+      {
+        path:"/petinfo",
+        element:<PetInfo/>
+      },
+      {
+        path:"/bookinghistory",
+        element:<BookingHistory/>
+      },
+      {
+        path:"/payment",
+        element:<PaymentPage/>
+      },
+      {
+        path:"/viewpayment",
+        element:<ViewPayment/>
+      },
+
+
     ],
   },
 ]);
