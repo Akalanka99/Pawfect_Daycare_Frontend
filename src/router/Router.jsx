@@ -9,6 +9,7 @@ import AboutUs from "../pages/AboutUs";
 import SingleDayDogModal from "../pages/Reseverstion/ModelsforPopUps/Dog/SingleDayDogModal";
 import SingleDayCatModal from "../pages/Reseverstion/ModelsforPopUps/Cat/SingleDayCatModal";
 import BookingSlotSingleDay from "../pages/Reseverstion/BookingSlots/BookingSlotSingleDay";
+import BookingSlotMultipleDay from "../pages/Reseverstion/BookingSlots/BookingSlotMultipleDay";
 
 const router = createBrowserRouter([
   {
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
       {
         path: "/single-schedule",
         element: <BookingSlotSingleDay />,
+      },
+      {
+        path: "/multiple-schedule",
+        element: <BookingSlotMultipleDay />,
       },
     ],
   },
