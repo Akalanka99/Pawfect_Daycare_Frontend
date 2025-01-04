@@ -6,10 +6,13 @@ import Profile from "../components/Profile";
 import RegisterForm from "../components/RegisterForm";
 import SignIn from "../components/SignIn";
 import AboutUs from "../pages/AboutUs";
-import SingleDayDogModal from "../pages/Reseverstion/ModelsforPopUps/Dog/SingleDayDogModal";
-import SingleDayCatModal from "../pages/Reseverstion/ModelsforPopUps/Cat/SingleDayCatModal";
-import BookingSlotSingleDay from "../pages/Reseverstion/BookingSlots/BookingSlotSingleDay";
-import BookingSlotMultipleDay from "../pages/Reseverstion/BookingSlots/BookingSlotMultipleDay";
+import BookingModal from "../pages/Reseverstion/BookingModal";
+import BookingSlot from "../pages/Reseverstion/BookingSlot";
+// import ProfilePage from "../pages/profile/ProfilePage";
+// import PetInfo from "../pages/profile/PetInfo";
+// import BookingHistory from "../pages/profile/BookingHistory";
+// import PaymentPage from "../pages/Payment/PaymentPage";
+
 
 const router = createBrowserRouter([
   {
@@ -37,26 +40,40 @@ const router = createBrowserRouter([
         element: <AboutUs />,
       },
 
+      // {
+      //   path: "/profile",
+      //   element: <Profile />,
+      // },
       {
-        path: "/profile",
-        element: <Profile />,
+        path: "/booking-dog",
+        element: <BookingModal animalType="dog" onClose={() => {}} />, // Pass "dog" as animalType
       },
       {
-        path: "/single-day-dog",
-        element: <SingleDayDogModal />,
+        path: "/booking-cat",
+        element: <BookingModal animalType="cat" onClose={() => {}} />, // Pass "cat" as animalType
       },
       {
-        path: "/single-day-cat",
-        element: <SingleDayCatModal />,
+        path: "/booking-slot",
+        element: <BookingSlot />,
       },
-      {
-        path: "/single-schedule",
-        element: <BookingSlotSingleDay />,
-      },
-      {
-        path: "/multiple-schedule",
-        element: <BookingSlotMultipleDay />,
-      },
+      // {
+      //   path:"/profile",
+      //   element:<ProfilePage/>
+      // },
+      // {
+      //   path:"/petinfo",
+      //   element:<PetInfo/>
+      // },
+      // {
+      //   path:"/bookinghistory",
+      //   element:<BookingHistory/>
+      // },
+      // {
+      //   path:"/payment",
+      //   element:<PaymentPage/>
+      // },
+      
+
     ],
   },
 ]);

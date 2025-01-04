@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import DogModal1 from "./ModelsforPopUps/Dog/DogModal1";
-import CatModal1 from "./ModelsforPopUps/Cat/CatModal1";
-// import { Calendar } from "lucide-react";
+import BookingModal from "../Reseverstion/BookingModal";
 
 const InputField = ({ label, ...props }) => (
   <div className="mb-4 flex justify-between items-center">
@@ -11,21 +9,12 @@ const InputField = ({ label, ...props }) => (
 );
 
 const PawFectReservationForm = () => {
-  // const [agreeTerms, setAgreeTerms] = useState(false);
   const [petCategory, setPetCategory] = useState("");
-  const [showDogModal1, setShowDogModal1] = useState(false);
-  const [showCatModal1, setShowCatModal1] = useState(false);
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   console.log("Form submitted");
-  // };
+  const [showBookingModal, setShowBookingModal] = useState(false);
 
   const handleShowModal = () => {
-    if (petCategory === "dog") {
-      setShowDogModal1(true); // Show modal if pet category is dog
-    } else if (petCategory === "cat") {
-      setShowCatModal1(true); // Show modal if pet category is cat
+    if (petCategory) {
+      setShowBookingModal(true); // Show the unified modal
     } else {
       alert("Please select a pet category to see available slots.");
     }
@@ -96,16 +85,19 @@ const PawFectReservationForm = () => {
         <button
           type="button"
           className="w-full bg-[#1B4A7B] text-white py-2 px-4 rounded hover:bg-[#58B5C6] transition duration-300"
-          // disabled={!agreeTerms}
           onClick={handleShowModal}
         >
           Available Slots
         </button>
       </form>
 
-      {/* Modal */}
-      {showDogModal1 && <DogModal1 onclose={() => setShowDogModal1(false)} />}
-      {showCatModal1 && <CatModal1 onclose={() => setShowCatModal1(false)} />}
+      {/* BookingModal */}
+      {showBookingModal && (
+        <BookingModal
+          animalType={petCategory} // Pass the selected pet category
+          onClose={() => setShowBookingModal(false)} // Handle modal close
+        />
+      )}
     </div>
   );
 };
