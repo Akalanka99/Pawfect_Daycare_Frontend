@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
+
 
 const BookingSlot = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { startDate, endDate, date, time } = location.state || {};
+  const reservationData = JSON.parse(localStorage.getItem("reservationData"));
+  const { startDate, endDate, date } = location.state || {};
 
   const [isMultipleDay, setIsMultipleDay] = useState(!!startDate && !!endDate);
   const [selectedStartDate, setSelectedStartDate] = useState(
@@ -13,28 +16,18 @@ const BookingSlot = () => {
   const [selectedEndDate, setSelectedEndDate] = useState(
     endDate || selectedStartDate
   );
-  const [currentMonth, setCurrentMonth] = useState(
-    new Date(selectedStartDate).getMonth()
-  );
-  const [currentYear, setCurrentYear] = useState(
-    new Date(selectedStartDate).getFullYear()
-  );
   const [cages, setCages] = useState([]);
   const [selectedCages, setSelectedCages] = useState({});
+  const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
+  const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
 
   const fetchCageAvailability = async () => {
-    // Simulating data for demonstration purposes
     const data = [
       { id: 1, morning: true, afternoon: true },
       { id: 2, morning: false, afternoon: true },
       { id: 3, morning: true, afternoon: false },
       { id: 4, morning: true, afternoon: true },
       { id: 5, morning: false, afternoon: false },
-      { id: 6, morning: false, afternoon: true },
-      { id: 7, morning: true, afternoon: false },
-      { id: 8, morning: false, afternoon: true },
-      { id: 9, morning: true, afternoon: false },
-      { id: 10, morning: true, afternoon: true },
     ];
     setCages(data);
   };
@@ -54,34 +47,16 @@ const BookingSlot = () => {
     });
   };
 
-  const handleBooking = () => {
-    const bookingData = Object.entries(selectedCages).map(
-      ([cageId, slots]) => ({
-        cageId: parseInt(cageId, 10),
-        startDate: selectedStartDate,
-        endDate: isMultipleDay ? selectedEndDate : selectedStartDate,
-        morning: slots.morning,
-        afternoon: slots.afternoon,
-      })
-    );
-    console.log("Booking Data:", bookingData);
-    alert("Booking confirmed. Data logged to the console.");
-  };
-
   const handleMonthChange = (direction) => {
     if (direction === "prev") {
+      setCurrentMonth((prev) => (prev === 0 ? 11 : prev - 1));
       if (currentMonth === 0) {
-        setCurrentMonth(11);
         setCurrentYear((prev) => prev - 1);
-      } else {
-        setCurrentMonth((prev) => prev - 1);
       }
     } else if (direction === "next") {
+      setCurrentMonth((prev) => (prev === 11 ? 0 : prev + 1));
       if (currentMonth === 11) {
-        setCurrentMonth(0);
         setCurrentYear((prev) => prev + 1);
-      } else {
-        setCurrentMonth((prev) => prev + 1);
       }
     }
   };
@@ -89,12 +64,10 @@ const BookingSlot = () => {
   const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
 
   const isDateInRange = (date) => {
-    if (!selectedStartDate || !selectedEndDate) return false;
-    const currentDate = new Date(date);
-    return (
-      currentDate >= new Date(selectedStartDate) &&
-      currentDate <= new Date(selectedEndDate)
-    );
+    const start = new Date(selectedStartDate);
+    const end = new Date(selectedEndDate);
+    const current = new Date(date);
+    return current >= start && current <= end;
   };
 
   const selectedMonthYear = new Date(currentYear, currentMonth).toLocaleString(
@@ -104,6 +77,32 @@ const BookingSlot = () => {
       year: "numeric",
     }
   );
+
+  const handleBooking = async () => {
+    const bookingData = Object.entries(selectedCages).map(
+      ([cageId, slots]) => ({
+        cageId: parseInt(cageId, 10),
+        startDate: selectedStartDate,
+        endDate: isMultipleDay ? selectedEndDate : selectedStartDate,
+        morning: slots.morning,
+        afternoon: slots.afternoon,
+      })
+    );
+
+    try {
+    
+      console.log("reservationData:", reservationData);  
+      const response = await axios.post("http://localhost:8080/api/reservations", reservationData, {headers: {
+        "Content-Type": "application/json",
+      }});
+      alert(response.data);
+      localStorage.clear();
+      navigate("/");
+    } catch (error) {
+      console.error("Error saving booking:", error);
+      alert("Failed to save booking. Please try again.");
+    }
+  };
 
   return (
     <div className="flex flex-col items-center p-4 bg-blue-100 min-h-screen">
