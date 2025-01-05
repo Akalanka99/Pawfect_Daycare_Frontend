@@ -18,21 +18,26 @@ const BookingModal = ({ animalType, onClose }) => {
       if (selectedOption === "singleDay") setStep(2);
       else if (selectedOption === "multipleDay") setStep(3);
     } else if (step === 2) {
-      if (
-        bookingDetails.date &&
-        (bookingDetails.time || !bookingDetails.isHalfDay)
-      ) {
-        navigate("/booking-slot", {
-          state: { ...bookingDetails, isMultipleDay: false },
-        });
+      if (bookingDetails.date && (bookingDetails.time || !bookingDetails.isHalfDay)) {
+        const existingData = JSON.parse(localStorage.getItem("reservationData"));
+        const updatedData = {
+          ...existingData,
+          bookingDetails: { ...bookingDetails, isMultipleDay: false },
+        };
+        localStorage.setItem("reservationData", JSON.stringify(updatedData));
+        navigate("/booking-slot", { state: updatedData });
       } else {
         alert("Please select a date and time.");
       }
     } else if (step === 3) {
       if (bookingDetails.startDate && bookingDetails.endDate) {
-        navigate("/booking-slot", {
-          state: { ...bookingDetails, isMultipleDay: true },
-        });
+        const existingData = JSON.parse(localStorage.getItem("reservationData"));
+        const updatedData = {
+          ...existingData,
+          bookingDetails: { ...bookingDetails, isMultipleDay: true },
+        };
+        localStorage.setItem("reservationData", JSON.stringify(updatedData));
+        navigate("/booking-slot", { state: updatedData });
       } else {
         alert("Please select valid start and end dates.");
       }

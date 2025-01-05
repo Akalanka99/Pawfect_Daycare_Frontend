@@ -1,20 +1,48 @@
 import React, { useState } from "react";
 import BookingModal from "../Reseverstion/BookingModal";
 
-const InputField = ({ label, ...props }) => (
+const InputField = ({ label, name, value, onChange, ...props }) => (
   <div className="mb-4 flex justify-between items-center">
     <label className="w-1/3 text-sm font-medium text-gray-700">{label}</label>
-    <input className="w-2/3 p-2 border border-gray-300 rounded" {...props} />
+    <input
+      className="w-2/3 p-2 border border-gray-300 rounded"
+      name={name}
+      value={value}
+      onChange={onChange}
+      {...props}
+    />
   </div>
 );
 
 const PawFectReservationForm = () => {
   const [petCategory, setPetCategory] = useState("");
+  const [formData, setFormData] = useState({
+    ownerName: "",
+    email: "",
+    address: "",
+    phoneNumber: "",
+    emergencyContact: "",
+    petCategory: "",
+    petName: "",
+    petBreed: "",
+    age: "",
+  });
   const [showBookingModal, setShowBookingModal] = useState(false);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
 
   const handleShowModal = () => {
     if (petCategory) {
-      setShowBookingModal(true); // Show the unified modal
+      const reservationData = { ...formData, petCategory };
+      console.log(reservationData);
+      localStorage.setItem("reservationData", JSON.stringify(reservationData));
+      setShowBookingModal(true);
     } else {
       alert("Please select a pet category to see available slots.");
     }
@@ -30,10 +58,38 @@ const PawFectReservationForm = () => {
         stay!
       </p>
       <form>
-        <InputField label="Owner's Name" type="text" required />
-        <InputField label="E-mail Address" type="email" required />
-        <InputField label="Home Address" type="text" required />
-        <InputField label="Phone Number" type="tel" required />
+        <InputField
+          label="Owner's Name"
+          name="ownerName"
+          type="text"
+          value={formData.ownerName}
+          onChange={handleInputChange}
+          required
+        />
+        <InputField
+          label="E-mail Address"
+          name="email"
+          type="email"
+          value={formData.email}
+          onChange={handleInputChange}
+          required
+        />
+        <InputField
+          label="Home Address"
+          name="address"
+          type="text"
+          value={formData.address}
+          onChange={handleInputChange}
+          required
+        />
+        <InputField
+          label="Phone Number"
+          name="phoneNumber"
+          type="tel"
+          value={formData.phoneNumber}
+          onChange={handleInputChange}
+          required
+        />
         <div className="mb-4 flex justify-between items-center">
           <label className="w-1/3 text-sm font-medium text-gray-700">
             Emergency Contact
@@ -42,6 +98,9 @@ const PawFectReservationForm = () => {
             <input
               className="w-full p-2 border border-gray-300 rounded"
               type="text"
+              name="emergencyContact"
+              value={formData.emergencyContact}
+              onChange={handleInputChange}
               required
             />
             <p className="text-xs text-gray-500 mt-2 text-center">
@@ -68,19 +127,53 @@ const PawFectReservationForm = () => {
 
         {petCategory === "dog" && (
           <>
-            <InputField label="Dog's Name" type="text" required />
-            <InputField label="Dog's Breed" type="text" required />
+            <InputField
+              label="Dog's Name"
+              name="petName"
+              type="text"
+              value={formData.petName}
+              onChange={handleInputChange}
+              required
+            />
+            <InputField
+              label="Dog's Breed"
+              name="petBreed"
+              type="text"
+              value={formData.petBreed}
+              onChange={handleInputChange}
+              required
+            />
           </>
         )}
 
         {petCategory === "cat" && (
           <>
-            <InputField label="Cat's Name" type="text" required />
-            <InputField label="Cat's Breed" type="text" required />
+            <InputField
+              label="Cat's Name"
+              name="petName"
+              type="text"
+              value={formData.petName}
+              onChange={handleInputChange}
+              required
+            />
+            <InputField
+              label="Cat's Breed"
+              name="petBreed"
+              type="text"
+              value={formData.petBreed}
+              onChange={handleInputChange}
+              required
+            />
           </>
         )}
 
-        <InputField label="Age" type="number" />
+        <InputField
+          label="Age"
+          name="age"
+          type="number"
+          value={formData.age}
+          onChange={handleInputChange}
+        />
 
         <button
           type="button"
@@ -94,8 +187,8 @@ const PawFectReservationForm = () => {
       {/* BookingModal */}
       {showBookingModal && (
         <BookingModal
-          animalType={petCategory} // Pass the selected pet category
-          onClose={() => setShowBookingModal(false)} // Handle modal close
+          animalType={petCategory}
+          onClose={() => setShowBookingModal(false)}
         />
       )}
     </div>
