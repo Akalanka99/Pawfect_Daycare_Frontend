@@ -4,7 +4,7 @@ import Home from "../pages/home/Home";
 import PawFectReservationForm from "../pages/Reseverstion/PawFectReservationForm";
 import Profile from "../components/Profile";
 import RegisterForm from "../components/RegisterForm";
-import SignIn from "../components/SignIn";
+//import SignIn from "../components/SignIn";
 import AboutUs from "../pages/AboutUs";
 import BookingModal from "../pages/Reseverstion/BookingModal";
 import BookingSlot from "../pages/Reseverstion/BookingSlot";
@@ -13,6 +13,7 @@ import PetInfo from "../pages/profile/PetInfo";
 import BookingHistory from "../pages/profile/BookingHistory";
 import ViewPayment from "../pages/Payment/ViewPayment";
 import PaymentPage from "../pages/Payment/PaymentPage";
+import SignInModal from "../components/Modal";
 
 
 
@@ -30,8 +31,8 @@ const router = createBrowserRouter([
         element: <PawFectReservationForm />,
       },
       {
-        path: "/signin",
-        element: <SignIn />,
+        path: "/modal",
+        element: <SignInModal/>,
       },
       {
         path: "/registerform",

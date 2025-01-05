@@ -124,9 +124,12 @@ const RegisterForm = () => {
           <div className="mt-4">
             <p>
               Already have an account?{' '}
-              <Link to="/signin" className="text-orange-500">
-                Login here
-              </Link>
+              <span 
+                onClick={() => document.getElementById("my_modal_5").showModal()} 
+                className="text-orange-500 cursor-pointer underline"
+                  >
+                   Login here
+                 </span>
             </p>
             <button
               onClick={handleGoogle}
