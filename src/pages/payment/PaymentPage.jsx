@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 
 const PaymentPage = () => {
@@ -41,7 +42,7 @@ const PaymentPage = () => {
         <form className="mt-8">
           <label className="block font-medium mb-2">Payment Method:</label>
           <select
-            className="w-full border rounded-md p-2 mb-4"
+            className="w-full border rounded-md p-2 mb-4 bg-white"
             value={paymentMethod}
             onChange={(e) => setPaymentMethod(e.target.value)}
           >
@@ -53,23 +54,23 @@ const PaymentPage = () => {
           {paymentMethod === "Credit/Debit Card" && (
             <>
               <label className="block font-medium mb-2">Cardholder Name:</label>
-              <input type="text" className="w-full border rounded-md p-2 mb-4" />
+              <input type="text" className="w-full border rounded-md p-2 mb-4 bg-white" />
 
               <label className="block font-medium mb-2">Card Number:</label>
-              <input type="text" className="w-full border rounded-md p-2 mb-4" />
+              <input type="text" className="w-full border rounded-md p-2 mb-4 bg-white" />
 
               <label className="block font-medium mb-2">Expiration Date:</label>
-              <input type="text" className="w-full border rounded-md p-2 mb-4" placeholder="MM/YY" />
+              <input type="text" className="w-full border rounded-md p-2 mb-4 bg-white" placeholder="MM/YY" />
 
               <label className="block font-medium mb-2">CVV:</label>
-              <input type="text" className="w-full border rounded-md p-2 mb-4" />
+              <input type="text" className="w-full border rounded-md p-2 mb-4 bg-white" />
             </>
           )}
 
           {paymentMethod === "Bank Transfer" && (
             <div>
               <label className="block font-medium mb-2">Bank Account Number:</label>
-              <input type="text" className="w-full border rounded-md p-2 mb-4" />
+              <input type="text" className="w-full border rounded-md p-2 mb-4 bg-white" />
             </div>
           )}
 

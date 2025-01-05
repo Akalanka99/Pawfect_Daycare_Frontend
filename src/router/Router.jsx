@@ -2,59 +2,78 @@ import { createBrowserRouter } from "react-router-dom";
 import Main from "../layout/Main";
 import Home from "../pages/home/Home";
 import PawFectReservationForm from "../pages/Reseverstion/PawFectReservationForm";
-import ProfilePage from "../pages/profile/ProfilePage";
-import PetInfo from "../pages/profile/PetInfo";
-import ViewPayment from "../pages/payment/viewPayment";
-import PaymentPage from "../pages/payment/Payment";
-import BookingHistory from "../pages/profile/BookingHistory";
+import Profile from "../pages/profile";
 import RegisterForm from "../components/RegisterForm";
 import SignIn from "../components/SignIn";
-
+import AboutUs from "../pages/AboutUs";
+import BookingModal from "../pages/Reseverstion/BookingModal";
+import BookingSlot from "../pages/Reseverstion/BookingSlot";
+import ProfilePage from "../pages/profile/ProfilePage";
+import PetInfo from "../pages/profile/PetInfo";
+import BookingHistory from "../pages/profile/BookingHistory";
+import PaymentPage from "../pages/Payment/PaymentPage";
+import ViewPayment from "../pages/payment/ViewPayment";
 
 const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <Main/>,
-      children:[
-        {
-            path: "/",
-            element: <Home/>
-        },
-        {
-          path:"/booknow",
-          element:<PawFectReservationForm/>
-        },
-        {
-           path:"/signin",
-          element:<SignIn/>
-        },
-        {
-          path:"/registerform",
-          element:<RegisterForm/>
-        },
-        {
-          path:"/profile",
-          element:<ProfilePage/>
-        },
-        {
-          path:"/petinfo",
-          element:<PetInfo/>
-        },
-        {
-          path:"/bookinghistory",
-          element:<BookingHistory/>
-        },
-        {
-          path:"/payment",
-          element:<PaymentPage/>
-        },
-        {
-          path:"/viewpayment",
-          element:<ViewPayment/>
-        },
-        
+  {
+    path: "/",
+    element: <Main />,
+    children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
+      {
+        path: "/bookingnow",
+        element: <PawFectReservationForm />,
+      },
+      {
+        path: "/signin",
+        element: <SignIn />,
+      },
+      {
+        path: "/registerform",
+        element: <RegisterForm />,
+      },
+      {
+        path: "/aboutus",
+        element: <AboutUs />,
+      },
+      {
+        path: "/booking-dog",
+        element: <BookingModal animalType="dog" onClose={() => {}} />, // Pass "dog" as animalType
+      },
+      {
+        path: "/booking-cat",
+        element: <BookingModal animalType="cat" onClose={() => {}} />, // Pass "cat" as animalType
+      },
+      {
+        path: "/booking-slot",
+        element: <BookingSlot />,
+      },
+      {
+        path:"/profile",
+        element:<ProfilePage/>
+      },
+      {
+        path:"/petinfo",
+        element:<PetInfo/>
+      },
+      {
+        path:"/bookinghistory",
+        element:<BookingHistory/>
+      },
+      {
+        path:"/paymentpage",
+        element:<PaymentPage/>
+      },
+      {
+        path:"/viewpayment",
+        element:<ViewPayment/>
+      },
 
-      ]
-    },
-  ]);
-  export default router;
+
+    ],
+  },
+]);
+export default router;
