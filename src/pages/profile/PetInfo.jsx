@@ -3,14 +3,7 @@ import React from "react";
 const PetInfo = () => {
   return (
     <div className="flex min-h-screen bg-gray-100">
-      {/* Sidebar */}
-      <aside className="w-1/4 bg-blue-100 p-4">
-        <ul className="space-y-4 font-semibold text-gray-700">
-          <li className="hover:text-black cursor-pointer">Profile</li>
-          <li className="hover:text-black cursor-pointer">Pet Information</li>
-        </ul>
-      </aside>
-
+  
       {/* Main Section */}
       <main className="flex-1 p-8 bg-white text-black">
         <h1 className="text-3xl font-bold text-center mb-8">Pet Information</h1>

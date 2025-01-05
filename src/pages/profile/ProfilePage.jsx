@@ -4,14 +4,6 @@ import { Link } from "react-router-dom";
 const ProfilePage = () => {
   return (
     <div className="flex min-h-screen bg-gray-100 text-black">
-      {/* Sidebar */}
-      <aside className="w-1/4 bg-blue-100 p-4">
-        <ul className="space-y-4 font-semibold text-gray-600">
-          <li className="hover:text-black cursor-pointer">Profile</li>
-          <li className="hover:text-black cursor-pointer">Pet Information</li>
-          
-        </ul>
-      </aside>
 
       {/* Profile Section */}
       <main className="flex-1 p-8 bg-white">
