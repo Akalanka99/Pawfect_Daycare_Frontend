@@ -30,7 +30,7 @@ const Navbar = () => {
         <a href="#" className="hover:text-gray-300">Service</a>
       </li>
       <li>
-        <a href="aboutus" className="hover:text-gray-300">AboutUs</a>
+        <a href="aboutus" className="hover:text-gray-300">About Us</a>
       </li>
     </>
   );
