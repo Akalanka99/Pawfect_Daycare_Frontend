@@ -24,7 +24,7 @@ const Banner = () => {
           </p>
           <button 
             className="btn bg-[#1B4A7B] px-8 py-3 font-semibold text-white rounded-full hover:bg-[#163c66] transition">
-            <a href="/bookingnow">Booking Now</a>
+            <a href="/bookingnow">Book Now</a>
           </button>
         </div> 
       </div>
