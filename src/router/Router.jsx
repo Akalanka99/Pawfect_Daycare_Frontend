@@ -14,8 +14,7 @@ import BookingHistory from "../pages/profile/BookingHistory";
 import ViewPayment from "../pages/Payment/ViewPayment";
 import PaymentPage from "../pages/Payment/PaymentPage";
 import SignInModal from "../components/Modal";
-
-
+import UpdatedReservationForm from "../pages/Reseverstion/UpdatedReservatioForm";
 
 const router = createBrowserRouter([
   {
@@ -32,11 +31,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/modal",
-        element: <SignInModal/>,
+        element: <SignInModal />,
       },
       {
         path: "/registerform",
-        element: <RegisterForm/>,
+        element: <RegisterForm />,
       },
       {
         path: "/aboutus",
@@ -60,23 +59,25 @@ const router = createBrowserRouter([
         element: <BookingSlot />,
       },
       {
-        path:"/profile",
-        element:<ProfilePage/>
+        path: "/profile",
+        element: <ProfilePage />,
       },
       {
-        path:"/petinfo",
-        element:<PetInfo/>
+        path: "/petinfo",
+        element: <PetInfo />,
       },
       {
-        path:"/bookinghistory",
-        element:<BookingHistory/>
+        path: "/bookinghistory",
+        element: <BookingHistory />,
       },
       {
-        path:"/payment",
-        element:<PaymentPage/>
+        path: "/payment",
+        element: <PaymentPage />,
       },
-      
-
+      {
+        path: "/updated-reservation",
+        element: <UpdatedReservationForm />,
+      },
     ],
   },
 ]);
