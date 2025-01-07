@@ -20,7 +20,7 @@ function Profile() {
 
   return (
     <div>
-      <div className="drawer drawer-end">
+      <div className="drawer drawer-end ">
         <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content">
           {/* Profile button */}

@@ -14,6 +14,7 @@ import BookingHistory from "../pages/profile/BookingHistory";
 import ViewPayment from "../pages/Payment/ViewPayment";
 import PaymentPage from "../pages/Payment/PaymentPage";
 import SignInModal from "../components/Modal";
+import Shop from "../pages/Shop/Shop";
 
 
 
@@ -75,6 +76,10 @@ const router = createBrowserRouter([
         path:"/payment",
         element:<PaymentPage/>
       },
+      {
+        path:"/shop",
+        element:<Shop/>
+      }
       
 
     ],
