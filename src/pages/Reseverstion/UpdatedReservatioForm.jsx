@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { Navigate } from "react-router-dom";
 
 const InputField = ({ label, name, value, onChange, ...props }) => (
   <div className="mb-4 flex justify-between items-center">
@@ -14,7 +16,6 @@ const InputField = ({ label, name, value, onChange, ...props }) => (
 );
 
 const UpdatedReservationForm = () => {
-  const [petCategory, setPetCategory] = useState("");
   const [formData, setFormData] = useState({
     ownerName: "",
     email: "",
@@ -30,29 +31,45 @@ const UpdatedReservationForm = () => {
     daycareDuration: "",
     daycareDate: "",
     serviceDuration: [],
-    stayDuration: [],
+    stayDuration: { from: "", to: "" },
     cageNo: "",
     groomingServices: [],
     vaccinationRecords: null,
     additionalDetails: "",
   });
-  const [showBookingModal, setShowBookingModal] = useState(false);
+
+  useEffect(() => {
+    const storedData = JSON.parse(localStorage.getItem("reservationData"));
+    if (storedData) {
+      setFormData(storedData);
+    }
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
+    
+    setFormData((prevState) => {
+      const updatedData = { ...prevState, [name]: value };
+  
+      // Auto-update Daycare Duration based on Stay Duration
+      if (name === "stayDuration") {
+        const { from, to } = updatedData.stayDuration;
+        updatedData.daycareDuration = from && to ? "Multiple Day" : "Single Day";
+      }
+  
+      return updatedData;
+    });
   };
+  
 
   const handleCheckboxChange = (e) => {
     const { name, value, checked } = e.target;
+
     setFormData((prevState) => ({
       ...prevState,
       [name]: checked
-        ? [...prevState[name], value]
-        : prevState[name].filter((item) => item !== value),
+         ? [...(prevState[name] || []), value] // Ensure iterable
+        : prevState[name]?.filter((item) => item !== value) || [], // Filter if it's an array
     }));
   };
 
@@ -62,6 +79,19 @@ const UpdatedReservationForm = () => {
       vaccinationRecords: e.target.files[0],
     }));
   };
+
+  const handleSubmit = async () => {
+    try {
+      await axios.post("http://localhost:8080/api/reservations", formData);
+      alert("Booking submitted successfully!");
+      localStorage.clear();
+      Navigate("/");
+    } catch (error) {
+      console.error("Error submitting reservation:", error);
+      alert("Failed to submit reservation. Please try again.");
+    }
+  };
+
 
   return (
     <div className="max-w-2xl mx-auto p-6 bg-white shadow-lg rounded-lg">
@@ -93,7 +123,7 @@ const UpdatedReservationForm = () => {
           label="Home Address"
           name="address"
           type="text"
-          value={formData.address}
+          value={formData.homeaddress}
           onChange={handleInputChange}
           required
         />
@@ -124,13 +154,13 @@ const UpdatedReservationForm = () => {
         />
 
         {/* Pet Details */}
-        {formData.petCategory.toLowerCase() === "dog" && (
+        {formData.petCategory?.toLowerCase() === "dog" && (
           <>
             <InputField
               label="Dog's Name"
               name="dogName"
               type="text"
-              value={formData.dogName}
+              value={formData.petName}
               onChange={handleInputChange}
               required
             />
@@ -138,20 +168,20 @@ const UpdatedReservationForm = () => {
               label="Dog's Breed"
               name="dogBreed"
               type="text"
-              value={formData.dogBreed}
+              value={formData.petBreed}
               onChange={handleInputChange}
               required
             />
           </>
         )}
 
-        {formData.petCategory.toLowerCase() === "cat" && (
+        {formData.petCategory?.toLowerCase() === "cat" && (
           <>
             <InputField
               label="Cat's Name"
               name="catName"
               type="text"
-              value={formData.catName}
+              value={formData.petName}
               onChange={handleInputChange}
               required
             />
@@ -159,7 +189,7 @@ const UpdatedReservationForm = () => {
               label="Cat's Breed"
               name="catBreed"
               type="text"
-              value={formData.catBreed}
+              value={formData.petBreed}
               onChange={handleInputChange}
               required
             />
@@ -189,12 +219,12 @@ const UpdatedReservationForm = () => {
         {formData.daycareDuration === "Single Day" && (
           <>
             <InputField
-              label="Daycare Date"
-              name="daycareDate"
-              type="date"
-              value={formData.daycareDate}
-              onChange={handleInputChange}
-              required
+               label="Daycare Duration"
+               name="daycareDuration"
+               type="text"
+               value={formData.daycareDuration}
+               onChange={handleInputChange}
+               readOnly
             />
             {/* Service Duration */}
             <div className="mb-4 flex justify-between items-center">
@@ -316,7 +346,7 @@ const UpdatedReservationForm = () => {
         </div>
 
         <button
-          type="button"
+          onClick={handleSubmit}
           className="w-full bg-[#1B4A7B] text-white py-2 px-4 rounded hover:bg-[#58B5C6] transition duration-300"
         >
           Submit
