@@ -65,37 +65,43 @@ const BookingSlot = () => {
     });
   };
 
-  const handleBooking = async () => {
-    const isMultipleDay = dateRange[0].startDate.getTime() !== dateRange[0].endDate.getTime();
+  const handleBooking = () => {
+    const isMultipleDay =
+      dateRange[0].startDate.getTime() !== dateRange[0].endDate.getTime();
+  
+    const bookingData = Object.entries(selectedCages).map(([cageId, slots]) => ({
+      cageId: parseInt(cageId, 10),
+      startDate: dateRange[0].startDate.toISOString().split("T")[0],
+      endDate: isMultipleDay
+        ? dateRange[0].endDate.toISOString().split("T")[0]
+        : dateRange[0].startDate.toISOString().split("T")[0],
+      morning: slots.morning,
+      afternoon: slots.afternoon,
+    }));
+  
+    const existingData = JSON.parse(localStorage.getItem("reservationData")) || {};
 
-    const bookingData = Object.entries(selectedCages).map(
-      ([cageId, slots]) => ({
-        cageId: parseInt(cageId, 10),
-        startDate: dateRange[0].startDate.toISOString().split("T")[0],
-        endDate: isMultipleDay
-          ? dateRange[0].endDate.toISOString().split("T")[0]
-          : dateRange[0].startDate.toISOString().split("T")[0],
-        morning: slots.morning,
-        afternoon: slots.afternoon,
-      })
-    );
-
-    try {
-      const reservationData = JSON.parse(localStorage.getItem("reservationData")) || {};
-      console.log("reservationData is ", reservationData);
-      alert("Successfully saved booking!");
-      const response = await axios.post(
-        "http://localhost:8080/api/reservations", reservationData
-      );
-      console.log(response.data);
-      localStorage.clear();
-      navigate("/");
-    } catch (error) {
-      console.error("Error saving booking:", error);
-      alert("Failed to save booking. Please try again.");
-    }
+    // Merge the new booking data with the existing data
+  const mergedData = {
+    ...existingData,
+    bookingDetails: {
+      ...existingData.bookingDetails, // Keep any existing booking details
+      startDate: dateRange[0].startDate,
+      endDate: dateRange[0].endDate,
+    },
+    cages: [
+      ...(existingData.cages || []), // Retain any existing cages data
+      ...bookingData, // Add the new cage booking data
+    ],
   };
 
+  // Store the merged data back to localStorage
+  localStorage.setItem("reservationData", JSON.stringify(mergedData));
+
+  // Navigate to the UpdatedReservationForm with the merged data
+  navigate("/updated-reservation", { state: mergedData });
+};
+  
   return (
     <div className="flex flex-col items-center p-4 bg-blue-100 min-h-screen">
       {/* Calendar Section */}
