@@ -19,7 +19,7 @@ const PawFectReservationForm = () => {
   const [formData, setFormData] = useState({
     ownerName: "",
     email: "",
-    address: "",
+    homeaddress: "",
     phoneNumber: "",
     emergencyContact: "",
     petCategory: "",
@@ -76,9 +76,9 @@ const PawFectReservationForm = () => {
         />
         <InputField
           label="Home Address"
-          name="address"
+          name="homeaddress"
           type="text"
-          value={formData.address}
+          value={formData.homeaddress}
           onChange={handleInputChange}
           required
         />
