@@ -13,6 +13,7 @@ import PetInfo from "../pages/profile/PetInfo";
 import BookingHistory from "../pages/profile/BookingHistory";
 import ViewPayment from "../pages/Payment/ViewPayment";
 import PaymentPage from "../pages/Payment/PaymentPage";
+import Services from "../pages/Services";
 
 
 
@@ -77,6 +78,10 @@ const router = createBrowserRouter([
       {
         path:"/viewpayment",
         element:<ViewPayment/>
+      },
+      {
+        path:"/services",
+        element:<Services/>
       },
       
 

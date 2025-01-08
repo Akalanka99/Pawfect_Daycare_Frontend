@@ -94,8 +94,8 @@ function AboutUs() {
         </h2>
         <ul className="list-disc pl-8 text-lg text-[#000000] mt-4 font-serif">
           <li>Daycare services with personalized attention</li>
-          <li>Professional grooming tailored to your pet's needs</li>
-          <li>Health and activity tracking to monitor your pet’s wellness</li>
+          <li>Professional grooming tailored to your pet&quot;s needs</li>
+          <li>Health and activity tracking to monitor your pet&quot;s wellness</li>
           <li>Emergency care with on-call veterinarians</li>
         </ul>
       </div>
@@ -106,9 +106,9 @@ function AboutUs() {
           What Our Clients Say
         </h2>
         <p className="text-lg text-[#000000] mt-4 font-serif">
-          "Pawfect Daycare is amazing! My dog absolutely loves it here." - Alex
-          P. "I’m so thankful for the loving staff and the great care they
-          provide." - Maria R.
+        &quot;Pawfect Daycare is amazing! My dog absolutely loves it here.&quot; - Alex
+          P.<br></br>&quot;I&#39;m so thankful for the loving staff and the great care they
+          provide.&quot; - Maria R.
         </p>
       </div>
 
