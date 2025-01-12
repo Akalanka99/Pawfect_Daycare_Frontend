@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const InputField = ({ label, name, value, onChange, ...props }) => (
   <div className="mb-4 flex justify-between items-center">
@@ -80,12 +80,15 @@ const UpdatedReservationForm = () => {
     }));
   };
 
+  const navigate = useNavigate();
+
+
   const handleSubmit = async () => {
     try {
       await axios.post("http://localhost:8080/api/reservations", formData);
       alert("Booking submitted successfully!");
       localStorage.clear();
-      Navigate("/");
+      navigate("/");
     } catch (error) {
       console.error("Error submitting reservation:", error);
       alert("Failed to submit reservation. Please try again.");
