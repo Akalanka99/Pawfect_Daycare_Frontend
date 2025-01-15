@@ -4,7 +4,7 @@ import Home from "../pages/home/Home";
 import PawFectReservationForm from "../pages/Reseverstion/PawFectReservationForm";
 import Profile from "../components/Profile";
 import RegisterForm from "../components/RegisterForm";
-import SignIn from "../components/SignIn";
+//import SignIn from "../components/SignIn";
 import AboutUs from "../pages/AboutUs";
 import BookingModal from "../pages/Reseverstion/BookingModal";
 import BookingSlot from "../pages/Reseverstion/BookingSlot";
@@ -14,8 +14,8 @@ import BookingHistory from "../pages/profile/BookingHistory";
 import ViewPayment from "../pages/Payment/ViewPayment";
 import PaymentPage from "../pages/Payment/PaymentPage";
 import Services from "../pages/Services";
-
-
+import SignInModal from "../components/Modal";
+import UpdatedReservationForm from "../pages/Reseverstion/UpdatedReservatioForm";
 
 const router = createBrowserRouter([
   {
@@ -31,12 +31,12 @@ const router = createBrowserRouter([
         element: <PawFectReservationForm />,
       },
       {
-        path: "/signin",
-        element: <SignIn />,
+        path: "/modal",
+        element: <SignInModal />,
       },
       {
         path: "/registerform",
-        element: <RegisterForm/>,
+        element: <RegisterForm />,
       },
       {
         path: "/aboutus",
@@ -60,20 +60,24 @@ const router = createBrowserRouter([
         element: <BookingSlot />,
       },
       {
-        path:"/profile",
-        element:<ProfilePage/>
+        path: "/profile",
+        element: <ProfilePage />,
       },
       {
-        path:"/petinfo",
-        element:<PetInfo/>
+        path: "/petinfo",
+        element: <PetInfo />,
       },
       {
-        path:"/bookinghistory",
-        element:<BookingHistory/>
+        path: "/bookinghistory",
+        element: <BookingHistory />,
       },
       {
-        path:"/payment",
-        element:<PaymentPage/>
+        path: "/payment",
+        element: <PaymentPage />,
+      },
+      {
+        path: "/updated-reservation",
+        element: <UpdatedReservationForm />,
       },
       {
         path:"/viewpayment",
@@ -84,7 +88,6 @@ const router = createBrowserRouter([
         element:<Services/>
       },
       
-
     ],
   },
 ]);

@@ -1,47 +1,58 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
+import { DateRange } from "react-date-range";
+import "react-date-range/dist/styles.css"; // main style file
+import "react-date-range/dist/theme/default.css"; // theme css file
 
 const BookingSlot = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { startDate, endDate, date, time } = location.state || {};
+  const [storedStartDate,setStoredStartDate]=useState(null);
+  const [storedEndDate,setStoredEndDate]=useState(null);
+  const [dateRange, setDateRange] = useState([
+    {
+      startDate: storedStartDate ? new Date(storedStartDate) : new Date(),
+      endDate: storedEndDate ? new Date(storedEndDate) : new Date(),
+      key: "selection",
+    },
+  ]);
 
-  const [isMultipleDay, setIsMultipleDay] = useState(!!startDate && !!endDate);
-  const [selectedStartDate, setSelectedStartDate] = useState(
-    startDate || date || new Date().toISOString().substring(0, 10)
-  );
-  const [selectedEndDate, setSelectedEndDate] = useState(
-    endDate || selectedStartDate
-  );
-  const [currentMonth, setCurrentMonth] = useState(
-    new Date(selectedStartDate).getMonth()
-  );
-  const [currentYear, setCurrentYear] = useState(
-    new Date(selectedStartDate).getFullYear()
-  );
   const [cages, setCages] = useState([]);
   const [selectedCages, setSelectedCages] = useState({});
 
   const fetchCageAvailability = async () => {
-    // Simulating data for demonstration purposes
     const data = [
       { id: 1, morning: true, afternoon: true },
       { id: 2, morning: false, afternoon: true },
       { id: 3, morning: true, afternoon: false },
       { id: 4, morning: true, afternoon: true },
       { id: 5, morning: false, afternoon: false },
-      { id: 6, morning: false, afternoon: true },
-      { id: 7, morning: true, afternoon: false },
-      { id: 8, morning: false, afternoon: true },
-      { id: 9, morning: true, afternoon: false },
-      { id: 10, morning: true, afternoon: true },
+      { id: 6, morning: true, afternoon: true },
+      { id: 7, morning: false, afternoon: true },
+      { id: 8, morning: true, afternoon: false },
+      { id: 9, morning: true, afternoon: true },
+      { id: 10, morning: false, afternoon: false }
     ];
     setCages(data);
   };
 
   useEffect(() => {
     fetchCageAvailability();
-  }, [selectedStartDate, selectedEndDate]);
+    const reservationData = JSON.parse(localStorage.getItem("reservationData")) || {};
+  console.log("reservationData is ", reservationData);
+  setStoredStartDate(reservationData.bookingDetails.startDate);
+  setStoredEndDate(reservationData.bookingDetails.endDate);
+  setDateRange([
+    {
+      startDate: new Date(reservationData.bookingDetails.startDate),
+      endDate: new Date(reservationData.bookingDetails.endDate),
+      key: "selection",
+    },
+  ]);
+  console.log(storedStartDate);
+  console.log(storedEndDate);
+  }, [storedStartDate]);
 
   const handleSlotSelection = (cageId, slot) => {
     setSelectedCages((prev) => {
@@ -55,107 +66,53 @@ const BookingSlot = () => {
   };
 
   const handleBooking = () => {
-    const bookingData = Object.entries(selectedCages).map(
-      ([cageId, slots]) => ({
-        cageId: parseInt(cageId, 10),
-        startDate: selectedStartDate,
-        endDate: isMultipleDay ? selectedEndDate : selectedStartDate,
-        morning: slots.morning,
-        afternoon: slots.afternoon,
-      })
-    );
-    console.log("Booking Data:", bookingData);
-    alert("Booking confirmed. Data logged to the console.");
+    const isMultipleDay =
+      dateRange[0].startDate.getTime() !== dateRange[0].endDate.getTime();
+  
+    const bookingData = Object.entries(selectedCages).map(([cageId, slots]) => ({
+      cageId: parseInt(cageId, 10),
+      startDate: dateRange[0].startDate.toISOString().split("T")[0],
+      endDate: isMultipleDay
+        ? dateRange[0].endDate.toISOString().split("T")[0]
+        : dateRange[0].startDate.toISOString().split("T")[0],
+      morning: slots.morning,
+      afternoon: slots.afternoon,
+    }));
+  
+    const existingData = JSON.parse(localStorage.getItem("reservationData")) || {};
+
+    // Merge the new booking data with the existing data
+  const mergedData = {
+    ...existingData,
+    bookingDetails: {
+      ...existingData.bookingDetails, // Keep any existing booking details
+      startDate: dateRange[0].startDate,
+      endDate: dateRange[0].endDate,
+    },
+    cages: [
+      ...(existingData.cages || []), // Retain any existing cages data
+      ...bookingData, // Add the new cage booking data
+    ],
   };
 
-  const handleMonthChange = (direction) => {
-    if (direction === "prev") {
-      if (currentMonth === 0) {
-        setCurrentMonth(11);
-        setCurrentYear((prev) => prev - 1);
-      } else {
-        setCurrentMonth((prev) => prev - 1);
-      }
-    } else if (direction === "next") {
-      if (currentMonth === 11) {
-        setCurrentMonth(0);
-        setCurrentYear((prev) => prev + 1);
-      } else {
-        setCurrentMonth((prev) => prev + 1);
-      }
-    }
-  };
+  // Store the merged data back to localStorage
+  localStorage.setItem("reservationData", JSON.stringify(mergedData));
 
-  const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
-
-  const isDateInRange = (date) => {
-    if (!selectedStartDate || !selectedEndDate) return false;
-    const currentDate = new Date(date);
-    return (
-      currentDate >= new Date(selectedStartDate) &&
-      currentDate <= new Date(selectedEndDate)
-    );
-  };
-
-  const selectedMonthYear = new Date(currentYear, currentMonth).toLocaleString(
-    "en-US",
-    {
-      month: "long",
-      year: "numeric",
-    }
-  );
-
+  // Navigate to the UpdatedReservationForm with the merged data
+  navigate("/updated-reservation", { state: mergedData });
+};
+  
   return (
     <div className="flex flex-col items-center p-4 bg-blue-100 min-h-screen">
       {/* Calendar Section */}
-      <div className="bg-white rounded-lg shadow-lg p-6 mb-6 w-full max-w-xl">
-        <div className="flex justify-between items-center mb-4">
-          <button
-            onClick={() => handleMonthChange("prev")}
-            className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300"
-          >
-            Previous
-          </button>
-          <h2 className="text-xl font-bold text-center">{selectedMonthYear}</h2>
-          <button
-            onClick={() => handleMonthChange("next")}
-            className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300"
-          >
-            Next
-          </button>
-        </div>
-        <div className="grid grid-cols-7 gap-2 text-center">
-          {["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"].map(
-            (day, index) => (
-              <div key={index} className="font-semibold text-gray-600">
-                {day}
-              </div>
-            )
-          )}
-          {Array.from({ length: daysInMonth }, (_, i) => {
-            const day = String(i + 1).padStart(2, "0");
-            const fullDate = `${currentYear}-${String(
-              currentMonth + 1
-            ).padStart(2, "0")}-${day}`;
-            return (
-              <button
-                key={i}
-                className={`py-2 rounded-lg ${
-                  isDateInRange(fullDate)
-                    ? "bg-blue-500 text-white"
-                    : "bg-gray-200"
-                }`}
-                onClick={() =>
-                  setIsMultipleDay
-                    ? setSelectedStartDate(fullDate)
-                    : setSelectedStartDate(fullDate)
-                }
-              >
-                {i + 1}
-              </button>
-            );
-          })}
-        </div>
+      <div className=" flex flex-col items-center bg-white rounded-lg   shadow-lg p-6 mb-6 w-full max-w-xl">
+        <DateRange
+          editableDateInputs={false}
+          onChange={(item) => setDateRange([item.selection])}
+          moveRangeOnFirstSelection={false}
+          ranges={dateRange}
+          minDate={new Date()}
+        />
       </div>
 
       {/* Cage Availability Section */}

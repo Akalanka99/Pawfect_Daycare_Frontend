@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 const BookingModal = ({ animalType, onClose }) => {
   const [selectedOption, setSelectedOption] = useState("");
   const [bookingDetails, setBookingDetails] = useState({
-    date: "",
     time: "",
     isHalfDay: false,
     startDate: "",
@@ -18,21 +17,26 @@ const BookingModal = ({ animalType, onClose }) => {
       if (selectedOption === "singleDay") setStep(2);
       else if (selectedOption === "multipleDay") setStep(3);
     } else if (step === 2) {
-      if (
-        bookingDetails.date &&
-        (bookingDetails.time || !bookingDetails.isHalfDay)
-      ) {
-        navigate("/booking-slot", {
-          state: { ...bookingDetails, isMultipleDay: false },
-        });
+      if (bookingDetails.startDate && (bookingDetails.time || !bookingDetails.isHalfDay)) {
+        const existingData = JSON.parse(localStorage.getItem("reservationData"));
+        const updatedData = {
+          ...existingData,
+          bookingDetails: { ...bookingDetails, isMultipleDay: false },
+        };
+        localStorage.setItem("reservationData", JSON.stringify(updatedData));
+        navigate("/booking-slot", { state: updatedData });
       } else {
         alert("Please select a date and time.");
       }
     } else if (step === 3) {
       if (bookingDetails.startDate && bookingDetails.endDate) {
-        navigate("/booking-slot", {
-          state: { ...bookingDetails, isMultipleDay: true },
-        });
+        const existingData = JSON.parse(localStorage.getItem("reservationData"));
+        const updatedData = {
+          ...existingData,
+          bookingDetails: { ...bookingDetails, isMultipleDay: true },
+        };
+        localStorage.setItem("reservationData", JSON.stringify(updatedData));
+        navigate("/booking-slot", { state: updatedData });
       } else {
         alert("Please select valid start and end dates.");
       }
@@ -94,9 +98,9 @@ const BookingModal = ({ animalType, onClose }) => {
               </label>
               <input
                 type="date"
-                value={bookingDetails.date}
+                value={bookingDetails.startDate}
                 onChange={(e) =>
-                  setBookingDetails({ ...bookingDetails, date: e.target.value })
+                  setBookingDetails({ ...bookingDetails, startDate: e.target.value, endDate: e.target.value })
                 }
                 className="w-full p-2 border rounded-lg"
               />
