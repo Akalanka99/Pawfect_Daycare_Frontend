@@ -26,7 +26,7 @@ const BookingModal = ({ animalType, onClose }) => {
         );
         const updatedData = {
           ...existingData,
-          bookingDetails: { ...bookingDetails, isMultipleDay: false },
+          bookingDetails: { ...bookingDetails, multipleDay: false, singleDay: true },
         };
         localStorage.setItem("reservationData", JSON.stringify(updatedData));
         navigate("/booking-slot", { state: updatedData });
@@ -40,7 +40,7 @@ const BookingModal = ({ animalType, onClose }) => {
         );
         const updatedData = {
           ...existingData,
-          bookingDetails: { ...bookingDetails, isMultipleDay: true },
+          bookingDetails: { ...bookingDetails, multipleDay: true },
         };
         localStorage.setItem("reservationData", JSON.stringify(updatedData));
         navigate("/booking-slot", { state: updatedData });
