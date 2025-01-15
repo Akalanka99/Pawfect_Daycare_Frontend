@@ -4,7 +4,6 @@ import Home from "../pages/home/Home";
 import PawFectReservationForm from "../pages/Reseverstion/PawFectReservationForm";
 import Profile from "../components/Profile";
 import RegisterForm from "../components/RegisterForm";
-//import SignIn from "../components/SignIn";
 import AboutUs from "../pages/AboutUs";
 import BookingModal from "../pages/Reseverstion/BookingModal";
 import BookingSlot from "../pages/Reseverstion/BookingSlot";
@@ -15,6 +14,7 @@ import ViewPayment from "../pages/Payment/ViewPayment";
 import PaymentPage from "../pages/Payment/PaymentPage";
 import SignInModal from "../components/Modal";
 import UpdatedReservationForm from "../pages/Reseverstion/UpdatedReservatioForm";
+import Shop from "../pages/Shop/Shop";
 
 const router = createBrowserRouter([
   {
@@ -40,12 +40,7 @@ const router = createBrowserRouter([
       {
         path: "/aboutus",
         element: <AboutUs />,
-      },
-
-      // {
-      //   path: "/profile",
-      //   element: <Profile />,
-      // },
+      }, 
       {
         path: "/booking-dog",
         element: <BookingModal animalType="dog" onClose={() => {}} />, // Pass "dog" as animalType
@@ -78,6 +73,11 @@ const router = createBrowserRouter([
         path: "/updated-reservation",
         element: <UpdatedReservationForm />,
       },
+      {
+        path:"/shop",
+        element:<Shop/>
+      },
+
     ],
   },
 ]);

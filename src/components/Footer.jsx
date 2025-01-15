@@ -13,10 +13,10 @@ const Footer = () => {
             className="rounded-full"
           />
 
-          <p className="my-5 md:w-40">
+          <div className="my-5 md:w-40">
             <h1>Pawfect Pet</h1>
             <h2>Day care</h2>
-          </p>
+          </div>
         </aside>
         <nav>
           <h6 className="footer-title">Useful Links</h6>
