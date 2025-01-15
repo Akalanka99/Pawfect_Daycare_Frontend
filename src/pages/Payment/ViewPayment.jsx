@@ -3,24 +3,13 @@ import React from "react";
 const ViewPayment = () => {
   return (
     <div className="min-h-screen bg-blue-50 flex flex-col items-center">
-      {/* Header */}
-      <header className="w-full bg-blue-900 text-white py-4">
-        <div className="max-w-4xl mx-auto flex justify-between items-center">
-          <h1 className="text-xl font-bold">PAWFECT RESERVATION</h1>
-          <nav>
-            <ul className="flex gap-4">
-              <li><a href="#" className="hover:underline">Home</a></li>
-              <li><a href="#" className="hover:underline">About Us</a></li>
-              <li><a href="#" className="hover:underline">Services</a></li>
-              <li><a href="#" className="hover:underline">Contact</a></li>
-            </ul>
-          </nav>
-        </div>
-      </header>
-
+      
       {/* Main Content */}
       <main className="w-full max-w-4xl bg-white shadow-md mt-8 rounded-lg p-8 text-black">
-        <h2 className="text-xl font-semibold mb-6">Fill in your pet’s details, and we’ll make sure they have a paw-some time!</h2>
+        
+        <h1 className="text-3xl font-bold text-center mb-8">Pawfect Payment Details</h1>
+        
+        <h2 className="text-xl font-semibold mb-6">We’ll make sure they have a paw-some time!</h2>
 
         <form className="space-y-4">
           {/* Owner Information */}
