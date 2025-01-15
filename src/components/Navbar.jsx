@@ -40,12 +40,9 @@ const Navbar = () => {
         </a>
       </li>
       <li>
-        <a
-          href="#"
-          className="hover:text-gray-300 text-center text-white text-[18px] font-medium  font-['Inter'] leading-[30px]"
-        >
-          Service
-        </a>
+        <a href="services" 
+          className="hover:text-gray-300 text-center text-white text-[18px] font-medium font-['Inter'] leading-[30px]"
+        >Services</a>
       </li>
       <li>
         <a

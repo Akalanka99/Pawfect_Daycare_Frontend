@@ -22,18 +22,45 @@ const BookingSlot = () => {
   const [selectedCages, setSelectedCages] = useState({});
 
   const fetchCageAvailability = async () => {
+
     const data = [
       { id: 1, morning: true, afternoon: true },
-      { id: 2, morning: false, afternoon: true },
-      { id: 3, morning: true, afternoon: false },
+      { id: 2, morning: true, afternoon: true },
+      { id: 3, morning: true, afternoon: true },
       { id: 4, morning: true, afternoon: true },
-      { id: 5, morning: false, afternoon: false },
+      { id: 5, morning: true, afternoon: true },
       { id: 6, morning: true, afternoon: true },
-      { id: 7, morning: false, afternoon: true },
-      { id: 8, morning: true, afternoon: false },
+      { id: 7, morning: true, afternoon: true },
+      { id: 8, morning: true, afternoon: true },
       { id: 9, morning: true, afternoon: true },
-      { id: 10, morning: false, afternoon: false }
+      { id: 10, morning: true, afternoon: true }
     ];
+    for (let i = 1; i < 11; i++) {
+      try {
+        const response = await axios.get("http://localhost:8080/api/reservations/cage/"+i);
+      if(response.status === 200){
+        data.forEach(element => {
+          if(element.id === response.data.cageId){
+            element.morning = !response.data.morning;
+            element.afternoon = !response.data.afternoon;
+          }
+          
+        });
+        console.log(response.data);
+
+        
+      }
+        
+      } catch (error) {
+        console.log('');
+        
+      }
+      
+      
+      
+    }
+    
+    
     setCages(data);
   };
 

@@ -103,8 +103,8 @@ function AboutUs() {
         </div>
         <ul className="text-black text-xl font-normal font-['Inter']">
           <li>Daycare services with personalized attention</li>
-          <li>Professional grooming tailored to your pet's needs</li>
-          <li>Health and activity tracking to monitor your pet’s wellness</li>
+          <li>Professional grooming tailored to your pet&quot;s needs</li>
+          <li>Health and activity tracking to monitor your pet&quot;s wellness</li>
           <li>Emergency care with on-call veterinarians</li>
         </ul>
       </div>
@@ -112,12 +112,12 @@ function AboutUs() {
       {/* Testimonials Section */}
       <div className="mb-12 text-center max-w-2xl">
         <div className="text-[#1b4a7b] text-xl mb-4 font-bold font-['Inter'] text-center ">
-          WHAT OUR CLIENT SAY
+          What our clients say
         </div>
         <p className="text-black text-xl font-normal font-['Inter']">
-          "Pawfect Daycare is amazing! My dog absolutely loves it here." - Alex
-          P. "I’m so thankful for the loving staff and the great care they
-          provide." - Maria R.
+        &quot;Pawfect Daycare is amazing! My dog absolutely loves it here.&quot; - Alex
+          P.<br></br>&quot;I&#39;m so thankful for the loving staff and the great care they
+          provide.&quot; - Maria R.
         </p>
       </div>
 

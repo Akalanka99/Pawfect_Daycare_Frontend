@@ -36,7 +36,7 @@ function Home() {
             </h3>
             <p className="text-center text-[#62686f] text-lg font-normal font-['Inter'] mb-4">
               A safe and comfortable place where your dog can stay and be cared
-              for while you're away.
+              for while you&#39;re away.
             </p>
             <button className="bg-[#1B4A7B] px-4 py-2 text-center text-[#f1fbfd] text-base font-bold font-['Inter'] rounded-full">
               View More
@@ -80,7 +80,7 @@ function Home() {
                   Dog Walking
                 </h3>
                 <p className="text-[#626970] text-lg font-normal font-['Inter']">
-                  Regular walks are essential for your dog's physical and mental
+                  Regular walks are essential for your dog&#39;s physical and mental
                   health. Daily exercise helps maintain a healthy weight,
                   prevents behavioral issues, and strengthens the bond between
                   you and your dog.
@@ -97,7 +97,7 @@ function Home() {
                 <p className="text-[#626970] text-lg font-normal font-['Inter']">
                   Keep your pet healthy with essential vaccines that protect
                   against serious diseases. Our clinic offers personalized
-                  vaccination schedules to ensure your pet's well-being.
+                  vaccination schedules to ensure your pet&#39;s well-being.
                 </p>
               </div>
               <img
@@ -119,7 +119,7 @@ function Home() {
                   Proper Nutrition
                 </h3>
                 <p className="text-[#626970] text-lg font-normal font-['Inter']">
-                  Schedule routine visits to the vet to ensure your pet's
+                  Schedule routine visits to the vet to ensure your pet&#39;s
                   overall health. Early detection of potential issues can lead
                   to more effective treatments and a healthier, happier pet.
                 </p>
@@ -133,7 +133,7 @@ function Home() {
                   Regular Vet Checkups
                 </h3>
                 <p className="text-[#626970] text-lg font-normal font-['Inter']">
-                  Provide a balanced diet tailored to your pet's specific needs.
+                  Provide a balanced diet tailored to your pet&#39;s specific needs.
                   Quality food contributes to their longevity, energy levels,
                   and overall well-being.
                 </p>
