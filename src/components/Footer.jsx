@@ -12,11 +12,11 @@ const Footer = () => {
             height="auto"
             className="rounded-full"
           />
-{
+
           <div className="my-5 md:w-40">
             <h1>Pawfect Pet</h1>
             <h2>Day care</h2>
-          </div> }
+          </div>
         </aside>
         <nav>
           <h6 className="footer-title">Useful Links</h6>

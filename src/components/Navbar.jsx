@@ -33,7 +33,7 @@ const Navbar = () => {
       </li>
       <li>
         <a
-          href="#"
+          href="shop"
           className="hover:text-gray-300 text-center text-white text-[18px] font-medium font-['Inter'] leading-[30px]"
         >
           Shop
