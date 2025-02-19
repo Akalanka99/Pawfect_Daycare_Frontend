@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 const BookingModal = ({ animalType, onClose }) => {
   const [selectedOption, setSelectedOption] = useState("");
   const [bookingDetails, setBookingDetails] = useState({
-    date: "",
     time: "",
     isHalfDay: false,
     startDate: "",
@@ -18,11 +17,16 @@ const BookingModal = ({ animalType, onClose }) => {
       if (selectedOption === "singleDay") setStep(2);
       else if (selectedOption === "multipleDay") setStep(3);
     } else if (step === 2) {
-      if (bookingDetails.date && (bookingDetails.time || !bookingDetails.isHalfDay)) {
-        const existingData = JSON.parse(localStorage.getItem("reservationData"));
+      if (
+        bookingDetails.startDate &&
+        (bookingDetails.time || !bookingDetails.isHalfDay)
+      ) {
+        const existingData = JSON.parse(
+          localStorage.getItem("reservationData")
+        );
         const updatedData = {
           ...existingData,
-          bookingDetails: { ...bookingDetails, isMultipleDay: false },
+          bookingDetails: { ...bookingDetails, multipleDay: false, singleDay: true },
         };
         localStorage.setItem("reservationData", JSON.stringify(updatedData));
         navigate("/booking-slot", { state: updatedData });
@@ -31,10 +35,12 @@ const BookingModal = ({ animalType, onClose }) => {
       }
     } else if (step === 3) {
       if (bookingDetails.startDate && bookingDetails.endDate) {
-        const existingData = JSON.parse(localStorage.getItem("reservationData"));
+        const existingData = JSON.parse(
+          localStorage.getItem("reservationData")
+        );
         const updatedData = {
           ...existingData,
-          bookingDetails: { ...bookingDetails, isMultipleDay: true },
+          bookingDetails: { ...bookingDetails, multipleDay: true },
         };
         localStorage.setItem("reservationData", JSON.stringify(updatedData));
         navigate("/booking-slot", { state: updatedData });
@@ -51,7 +57,15 @@ const BookingModal = ({ animalType, onClose }) => {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-      <div className="bg-white w-96 rounded-lg p-6 shadow-lg">
+      <div className="bg-white w-96 rounded-lg p-6 shadow-lg relative">
+        {/* Close Button */}
+        <button
+          onClick={onClose}
+          className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
+          aria-label="Close"
+        >
+          &#x2715;
+        </button>
         {/* Header */}
         <h2 className="text-xl font-bold text-center mb-4">
           PawFect for Your Beloved {animalType === "dog" ? "Dog" : "Cat"}
@@ -63,7 +77,7 @@ const BookingModal = ({ animalType, onClose }) => {
             <p className="text-center mb-6">
               How long do you need daycare services for your {animalType}?
             </p>
-            <div className="space-y-4">
+            <div className="space-y-4 mb-6">
               <label className="flex items-center space-x-2">
                 <input
                   type="radio"
@@ -99,9 +113,13 @@ const BookingModal = ({ animalType, onClose }) => {
               </label>
               <input
                 type="date"
-                value={bookingDetails.date}
+                value={bookingDetails.startDate}
                 onChange={(e) =>
-                  setBookingDetails({ ...bookingDetails, date: e.target.value })
+                  setBookingDetails({
+                    ...bookingDetails,
+                    startDate: e.target.value,
+                    endDate: e.target.value,
+                  })
                 }
                 className="w-full p-2 border rounded-lg"
               />

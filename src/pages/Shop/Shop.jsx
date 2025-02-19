@@ -38,7 +38,7 @@ const Shop = () => {
     return (
         <div>
             {/* Welcome Section with Blurred Background */}
-            <div className="relative flex flex-col md:flex-row-reverse justify-between items-center gap-8 p-10 min-h-[50vh] -z-10">
+            <div className="relative flex flex-col md:flex-row-reverse justify-between items-center gap-8 p-10 min-h-[50vh] ">
                 {/* Background Image with Blur */}
                 <div 
                     className="absolute inset-0 w-full h-full bg-cover bg-center opacity-50" 
@@ -89,12 +89,12 @@ const Shop = () => {
                                 <img 
                                     src={item.image} 
                                     alt={item.name} 
-                                    className="w-full h-24 object-cover rounded-md" 
+                                    className="w-full h-72 object-cover rounded-md" 
                                     onError={(e) => e.target.src = "/images/default.jpg"} 
                                 />
                                 <h3 className="text-lg font-semibold mt-2">{item.name}</h3>
                                 <p className="text-gray-600">{item.description}</p>
-                                <p className="text-blue-500 font-bold mt-2">${item.price}</p>
+                                <p className="text-blue-500 font-bold mt-2">Rs.{item.price}</p>
                             </div>
                         ))
                     ) : (

@@ -3,7 +3,7 @@
       "id": 1,
       "name": "Premium Dog Food",
       "category": "dog-foods",
-      "price": 25.99,
+      "price": 1500,
       "description": "High-protein, grain-free dog food for all breeds.",
       "image": "/images/dogfood1.jpg"
     },
@@ -11,39 +11,39 @@
       "id": 2,
       "name": "Cat Scratching Post",
       "category": "Toys",
-      "price": 39.99,
+      "price": 4500,
       "description": "Durable scratching post to keep your cat entertained.",
-      "image": "https://example.com/images/scratching-post.jpg"
+      "image": "/images/scratching-post.jpeg"
     },
     {
       "id": 3,
       "name": "Bird Cage",
       "category": "Housing",
-      "price": 79.99,
+      "price": 7500,
       "description": "Spacious and well-ventilated bird cage with accessories.",
-      "image": "https://example.com/images/bird-cage.jpg"
+      "image": "/images/bird-cage.jpg"
     },
     {
       "id": 4,
       "name": "Fish Tank with LED Light",
       "category": "Housing",
-      "price": 99.99,
+      "price": 9000,
       "description": "Glass fish tank with built-in LED lighting and filter.",
-      "image": "https://example.com/images/fish-tank.jpg"
+      "image": "/images/fish-tank.jpg"
     },
     {
       "id": 5,
       "name": "Rabbit Hay Feeder",
       "category": "All",
-      "price": 15.49,
+      "price": 1300,
       "description": "Wooden hay feeder to keep your rabbit’s food clean and fresh.",
-      "image": "https://example.com/images/hay-feeder.jpg"
+      "image": "/images/hay-feeder.jpg"
     },
     {
       "id": 6,
       "name": "Dog Chew Toy",
       "category": "toys",
-      "price": 12.99,
+      "price": 500,
       "description": "Durable chew toy to keep your dog engaged and reduce boredom.",
       "image": "https://example.com/images/dog-chew-toy.jpg"
     },
@@ -51,33 +51,41 @@
       "id": 7,
       "name": "Cat Litter Box",
       "category": "All",
-      "price": 29.99,
+      "price": 500,
       "description": "Spacious and easy-to-clean litter box for your cat.",
-      "image": "https://example.com/images/cat-litter-box.jpg"
+      "image": "/images/cat-litter-box.jpg"
     },
     {
       "id": 8,
       "name": "Parrot Food Mix",
       "category": "All",
-      "price": 19.99,
+      "price": 800,
       "description": "A healthy mix of seeds, nuts, and dried fruits for parrots.",
-      "image": "https://example.com/images/parrot-food.jpg"
+      "image": "/images/parrot-food.jpg"
     },
     {
       "id": 9,
       "name": "Dog Leash and Collar Set",
       "category": "All",
-      "price": 22.50,
+      "price": 400,
       "description": "Adjustable and comfortable collar with a strong leash.",
-      "image": "https://example.com/images/dog-leash.jpg"
+      "image": "/images/dog-leash.jpg"
     },
     {
       "id": 10,
       "name": "Hamster Wheel",
       "category": "Toys",
-      "price": 18.99,
+      "price": 1500,
       "description": "Silent running wheel to keep your hamster active and healthy.",
-      "image": "https://example.com/images/hamster-wheel.jpg"
+      "image": "/images/hamster-wheel.jpg"
+    },
+    {
+      "id": 11,
+      "name": "Premium cat Food",
+      "category": "cat-foods",
+      "price": 1500,
+      "description": "High-protein, grain-free dog food for all breeds.",
+      "image": "/images/catfood1.webp"
     }
   ]
   

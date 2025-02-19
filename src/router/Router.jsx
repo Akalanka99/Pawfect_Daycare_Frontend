@@ -4,7 +4,6 @@ import Home from "../pages/home/Home";
 import PawFectReservationForm from "../pages/Reseverstion/PawFectReservationForm";
 import Profile from "../components/Profile";
 import RegisterForm from "../components/RegisterForm";
-//import SignIn from "../components/SignIn";
 import AboutUs from "../pages/AboutUs";
 import BookingModal from "../pages/Reseverstion/BookingModal";
 import BookingSlot from "../pages/Reseverstion/BookingSlot";
@@ -13,14 +12,10 @@ import PetInfo from "../pages/profile/PetInfo";
 import BookingHistory from "../pages/profile/BookingHistory";
 import ViewPayment from "../pages/Payment/ViewPayment";
 import PaymentPage from "../pages/Payment/PaymentPage";
+import Services from "../pages/Services";
 import SignInModal from "../components/Modal";
+import UpdatedReservationForm from "../pages/Reseverstion/UpdatedReservatioForm";
 import Shop from "../pages/Shop/Shop";
-import Dashboard from "../pages/dashboard/admin/Dashboard";
-import { Users } from "react-feather";
-import DashboardLayout from "../layout/DashboardLayout";
-import PrivateRoute from "../PrivateRoute/PrivateRoute";
-
-
 
 const router = createBrowserRouter([
   {
@@ -37,21 +32,16 @@ const router = createBrowserRouter([
       },
       {
         path: "/modal",
-        element: <SignInModal/>,
+        element: <SignInModal />,
       },
       {
         path: "/registerform",
-        element: <RegisterForm/>,
+        element: <RegisterForm />,
       },
       {
         path: "/aboutus",
         element: <AboutUs />,
-      },
-
-      // {
-      //   path: "/profile",
-      //   element: <Profile />,
-      // },
+      }, 
       {
         path: "/booking-dog",
         element: <BookingModal animalType="dog" onClose={() => {}} />, // Pass "dog" as animalType
@@ -65,20 +55,28 @@ const router = createBrowserRouter([
         element: <BookingSlot />,
       },
       {
-        path:"/profile",
-        element:<ProfilePage/>
+        path: "/profile",
+        element: <ProfilePage />,
       },
       {
-        path:"/petinfo",
-        element:<PetInfo/>
+        path: "/petinfo",
+        element: <PetInfo />,
       },
       {
-        path:"/bookinghistory",
-        element:<BookingHistory/>
+        path: "/bookinghistory",
+        element: <BookingHistory />,
       },
       {
-        path:"/payment",
-        element:<PaymentPage/>
+        path: "/payment",
+        element: <PaymentPage />,
+      },
+      {
+        path: "/updated-reservation",
+        element: <UpdatedReservationForm />,
+      },
+      {
+        path:"/shop",
+        element:<Shop/>
       },
       {
         path:"/shop",
@@ -102,6 +100,13 @@ const router = createBrowserRouter([
 
       
 
+        path:"/viewpayment",
+        element:<ViewPayment/>
+      },
+      {
+        path:"/services",
+        element:<Services/>
+      },
     ],
   },
 ]);
