@@ -15,6 +15,10 @@ import ViewPayment from "../pages/Payment/ViewPayment";
 import PaymentPage from "../pages/Payment/PaymentPage";
 import SignInModal from "../components/Modal";
 import Shop from "../pages/Shop/Shop";
+import Dashboard from "../pages/dashboard/admin/Dashboard";
+import { Users } from "react-feather";
+import DashboardLayout from "../layout/DashboardLayout";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 
 
@@ -79,7 +83,23 @@ const router = createBrowserRouter([
       {
         path:"/shop",
         element:<Shop/>
-      }
+      },
+      {
+        path:'dashboard',
+        element:<PrivateRoute><DashboardLayout/></PrivateRoute>,
+        children:[
+          {
+            path:'',
+            element:<Dashboard/>
+          },
+          {
+            path:'users',
+            element:<Users/>
+          },
+
+        ]
+      },
+
       
 
     ],
