@@ -111,10 +111,9 @@ const Navbar = () => {
               onClick={() => document.getElementById("my_modal_5").showModal()}
               className="btn flex text-white items-center gap-2 rounded-full px-6 bg-[#58B5C6]"
             >
-              SignIn
+              Sign In
             </button>
           )}
-
           <Modal />
         </div>
       </div>
