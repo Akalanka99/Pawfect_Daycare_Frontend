@@ -24,7 +24,7 @@ function Home() {
               comfort during your absence.
             </p>
             <button className="bg-[#1B4A7B] px-4 py-2 text-center text-[#f1fbfd] text-base font-bold font-['Inter'] rounded-full">
-              View More
+            <a href="services">View More</a>
             </button>
           </div>
 
@@ -39,7 +39,7 @@ function Home() {
               for while you&#39;re away.
             </p>
             <button className="bg-[#1B4A7B] px-4 py-2 text-center text-[#f1fbfd] text-base font-bold font-['Inter'] rounded-full">
-              View More
+            <a href="services">View More</a>
             </button>
           </div>
 
@@ -54,7 +54,7 @@ function Home() {
               looking their best.
             </p>
             <button className="bg-[#1B4A7B] px-4 py-2 text-center text-[#f1fbfd] text-base font-bold font-['Inter'] rounded-full">
-              View More
+            <a href="services">View More</a>
             </button>
           </div>
         </div>
