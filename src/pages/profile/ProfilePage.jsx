@@ -24,10 +24,11 @@ const ProfilePage = () => {
             <div className="flex justify-between">
               <span className="font-semibold">Name:</span>
               <span>Akalanka</span>
+      
             </div>
             <div className="flex justify-between">
               <span className="font-semibold">E-mail Address:</span>
-              <span>Akalanka@gmail.com</span>
+              <span>aaaaaaaaaaaaaa@gmail.com</span>
             </div>
             <div className="flex justify-between items-center">
               <label htmlFor="password" className="font-semibold">
