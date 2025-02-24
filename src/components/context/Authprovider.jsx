@@ -13,6 +13,24 @@ const Authprovider = ({children}) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
+     // Function to send the Firebase ID token to the backend for verification
+  const verifyTokenWithBackend = async (idToken) => {
+    try {
+      const response = await fetch('http://localhost:8080/api/verify-token', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ token: idToken }),
+      });
+      const data = await response.json();
+      console.log('Backend response:', data);
+    } catch (error) {
+      console.error('Error verifying token with backend:', error);
+    }
+  };
+
+
    //create account
     const createUser = (email, password) => {
         setLoading(true);
@@ -34,21 +52,26 @@ const Authprovider = ({children}) => {
         return signOut(auth)
     }
 
-    //cheack in sign in user
-    useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, currentUser => {
-            //console.log(currentUser);
-            setUser(currentUser)
-            setLoading(false);
-        });
-        return () => {
-            return unsubscribe();
-        }
-      
-    }, [])
-       
-  
+  // Check if the user is signed in
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+      if (currentUser) {
+        // If the user is signed in, get the ID token and send it to the backend
+        const idToken = await currentUser.getIdToken();
+        console.log('Firebase ID Token:', idToken);
+        await verifyTokenWithBackend(idToken);
+      } else {
+        // If the user is signed out, clear the user state
+        setUser(null);
+      }
+      setUser(currentUser);
+      setLoading(false);
+    });
 
+    return () => unsubscribe();
+}, []);
+
+  
     const authInfo = {
         user,
         createUser,

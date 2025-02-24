@@ -16,6 +16,7 @@ import Services from "../pages/Services";
 import SignInModal from "../components/Modal";
 import UpdatedReservationForm from "../pages/Reseverstion/UpdatedReservatioForm";
 import Shop from "../pages/Shop/Shop";
+import AdminDashboard from "../pages/adminDashboard/admin";
 
 const router = createBrowserRouter([
   {
@@ -78,7 +79,7 @@ const router = createBrowserRouter([
         path:"/shop",
         element:<Shop/>
       },
-
+      {
         path:"/viewpayment",
         element:<ViewPayment/>
       },
@@ -86,6 +87,10 @@ const router = createBrowserRouter([
         path:"/services",
         element:<Services/>
       },
+      {
+        path:"/admin-dashboard",
+        element:<AdminDashboard/>
+      }
     ],
   },
 ]);
