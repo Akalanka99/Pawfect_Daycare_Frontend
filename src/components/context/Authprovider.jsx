@@ -11,6 +11,7 @@ const googleprovider = new GoogleAuthProvider();
 
 const Authprovider = ({children}) => {
     const [user, setUser] = useState(null);
+    const [role, setRole] = useState(null);
     const [loading, setLoading] = useState(true);
 
      // Function to send the Firebase ID token to the backend for verification
@@ -78,8 +79,8 @@ const Authprovider = ({children}) => {
         loginwithGoogle,
         login,
         logOut,
-        loading
-        
+        loading,
+        role,
     }
   return (
     <AuthContext.Provider value={authInfo}>
