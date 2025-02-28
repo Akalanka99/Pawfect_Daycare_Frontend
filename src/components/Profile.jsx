@@ -3,7 +3,7 @@ import { AuthContext } from './context/Authprovider';
 
 
 function Profile() {
-  const { user, logOut } = useContext(AuthContext); // Get user from context
+  const { user, role, logOut } = useContext(AuthContext); // Get user from context
 
   const handleLogout = async () => {
     try {
@@ -53,6 +53,11 @@ function Profile() {
             <li>
               <a href = "/profile">Profile</a>
             </li>
+            {role === "ADMIN" && ( 
+                <li>
+                  <a href="/admin-dashboard">Dashboard</a>
+                </li>
+              )}
             <li>
               <a href = "/petinfo">Pet Information</a>
             </li>
