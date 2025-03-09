@@ -41,7 +41,7 @@ const router = createBrowserRouter([
       {
         path: "/aboutus",
         element: <AboutUs />,
-      }, 
+      },
       {
         path: "/booking-dog",
         element: <BookingModal animalType="dog" onClose={() => {}} />, // Pass "dog" as animalType
@@ -75,16 +75,16 @@ const router = createBrowserRouter([
         element: <UpdatedReservationForm />,
       },
       {
-        path:"/shop",
-        element:<Shop/>
-      },
-
-        path:"/viewpayment",
-        element:<ViewPayment/>
+        path: "/shop",
+        element: <Shop />,
       },
       {
-        path:"/services",
-        element:<Services/>
+        path: "/viewpayment",
+        element: <ViewPayment />,
+      },
+      {
+        path: "/services",
+        element: <Services />,
       },
     ],
   },
