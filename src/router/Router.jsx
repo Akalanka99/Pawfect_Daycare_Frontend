@@ -21,6 +21,7 @@ import AddProduct from "../pages/dashboard/AddProduct";
 import ManageProducts from "../pages/dashboard/ManageProducts";
 import { Outlet } from "react-router-dom"; 
 import UpdateProduct from "../pages/dashboard/UpdateProduct";
+import Users from "../pages/dashboard/Users";
 
 const router = createBrowserRouter([
   {
@@ -116,11 +117,13 @@ const router = createBrowserRouter([
          element: <UpdateProduct />,  // Make sure you have an UpdateProduct component
          loader: async ({ params }) => {
             return fetch(`http://localhost:8080/api/product/${params.id}`);
-          },
+          },  
+       }, 
+       {
+         path: "users", 
+         element: <Users/> 
+      },
 
-
-         
-       } 
     ],
   },
 ]);
