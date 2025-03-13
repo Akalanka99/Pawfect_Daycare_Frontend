@@ -2,12 +2,11 @@ import { createBrowserRouter } from "react-router-dom";
 import Main from "../layout/Main";
 import Home from "../pages/home/Home";
 import PawFectReservationForm from "../pages/Reseverstion/PawFectReservationForm";
-import Profile from "../components/Profile";
+import ProfilePage from "../pages/profile/ProfilePage";
 import RegisterForm from "../components/RegisterForm";
 import AboutUs from "../pages/AboutUs";
 import BookingModal from "../pages/Reseverstion/BookingModal";
 import BookingSlot from "../pages/Reseverstion/BookingSlot";
-import ProfilePage from "../pages/profile/ProfilePage";
 import PetInfo from "../pages/profile/PetInfo";
 import BookingHistory from "../pages/profile/BookingHistory";
 import ViewPayment from "../pages/Payment/ViewPayment";
@@ -24,74 +23,101 @@ const router = createBrowserRouter([
     element: <Main />,
     children: [
       {
-        path: "/",
-        element: <Home />,
+         path: "/", 
+        element: <Home /> 
+      },
+      { 
+        path: "/bookingnow", 
+        element: <PawFectReservationForm /> 
       },
       {
-        path: "/bookingnow",
-        element: <PawFectReservationForm />,
+         path: "/modal", 
+         element: <SignInModal /> 
       },
-      {
-        path: "/modal",
-        element: <SignInModal />,
-      },
-      {
+      { 
         path: "/registerform",
-        element: <RegisterForm />,
+        element: <RegisterForm /> 
       },
       {
-        path: "/aboutus",
-        element: <AboutUs />,
+         path: "/aboutus", 
+         element: <AboutUs /> 
+      },
+      {
+         path: "/booking-dog", 
+         element: <BookingModal animalType="dog" onClose={() => {}} /> 
+      },
+      {
+         path: "/booking-cat", 
+         element: <BookingModal animalType="cat" onClose={() => {}} /> 
+      },
+      {
+         path: "/booking-slot", 
+         element: <BookingSlot /> 
+      },
+      {
+         path: "/profile", 
+         element: <ProfilePage /> 
+      },
+      {
+         path: "/petinfo", 
+         element: <PetInfo /> 
+      },
+      {
+         path: "/bookinghistory", 
+         element: <BookingHistory />
+      },
+      {
+         path: "/payment", 
+         element: <PaymentPage />
+      },
+      {
+         path: "/updated-reservation", 
+         element: <UpdatedReservationForm /> 
+      },
+      {
+         path: "/shop", 
+         element: <Shop /> 
+      },
+      {
+         path: "/viewpayment", 
+         element: <ViewPayment /> 
+      },
+      {
+         path: "/services", 
+         element: <Services /> 
+      },
+    ],
+  },
+
+  // Admin Routes
+  {
+    path: "/admin-dashboard",
+    element: <AdminDashboard />, 
+    children: [
+      {
+         path: "", 
+         element: <Dashboard /> 
       }, 
       {
-        path: "/booking-dog",
-        element: <BookingModal animalType="dog" onClose={() => {}} />, // Pass "dog" as animalType
+         path: "add-shop", 
+         element: <AddProduct /> 
+      }, 
+      {
+         path: "manage-product", 
+         element: <ManageProducts /> 
       },
       {
-        path: "/booking-cat",
-        element: <BookingModal animalType="cat" onClose={() => {}} />, // Pass "cat" as animalType
-      },
-      {
-        path: "/booking-slot",
-        element: <BookingSlot />,
-      },
-      {
-        path: "/profile",
-        element: <ProfilePage />,
-      },
-      {
-        path: "/petinfo",
-        element: <PetInfo />,
-      },
-      {
-        path: "/bookinghistory",
-        element: <BookingHistory />,
-      },
-      {
-        path: "/payment",
-        element: <PaymentPage />,
-      },
-      {
-        path: "/updated-reservation",
-        element: <UpdatedReservationForm />,
-      },
-      {
-        path:"/shop",
-        element:<Shop/>
-      },
-      {
-        path:"/viewpayment",
-        element:<ViewPayment/>
-      },
-      {
-        path:"/services",
-        element:<Services/>
-      },
-      {
-        path:"/admin-dashboard",
-        element:<AdminDashboard/>
-      }
+         path: "update-product/:id", 
+         element: <UpdateProduct />,  // Make sure you have an UpdateProduct component
+         loader: async ({ params }) => {
+            return fetch(`http://localhost:8080/api/product/${params.id}`);
+          },
+
+
+         
+       } 
     ],
   },
 ]);
+
 export default router;
