@@ -111,11 +111,13 @@ const router = createBrowserRouter([
          element: <UpdateProduct />,  // Make sure you have an UpdateProduct component
          loader: async ({ params }) => {
             return fetch(`http://localhost:8080/api/product/${params.id}`);
-          },
+          },  
+       }, 
+       {
+         path: "users", 
+         element: <Users/> 
+      },
 
-
-         
-       } 
     ],
   },
 ]);

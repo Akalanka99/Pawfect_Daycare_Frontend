@@ -1,14 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { FaTrashAlt, FaUser, FaUsers } from "react-icons/fa";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import useAxiosSecure from "../hooks/useAxiosPublic";
 
 const Users = () => {
   const axiosSecure = useAxiosSecure();
   const { refetch, data: users = [] } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-      const res = await axiosSecure.get("/users");
+      const res = await axiosSecure.get("/api/users");
       return res.data;
     },
   });
@@ -38,7 +38,7 @@ const Users = () => {
         <div className="overflow-x-auto">
           <table className="table table-zebra md:w-[870px]">
             {/* head */}
-            <thead className="bg-orange text-white rounded-lg">
+            <thead className="bg-blue1 text-white rounded-lg">
               <tr>
                 <th>#</th>
                 <th>Name</th>
@@ -57,14 +57,14 @@ const Users = () => {
                     {user.role === "admin" ? "Admin" : (
                       <button
                         onClick={() => handleMakeAdmin(user)}
-                        className="btn btn-xs btn-circle bg-orange text-white"
+                        className="btn btn-xs btn-circle bg-blue1 text-white"
                       >
                         <FaUsers />
                       </button>
                     )}
                   </td>
                   <td>
-                    <button onClick={() => handleDeleteUser(user)} className="btn btn-xs bg-orange text-white">
+                    <button onClick={() => handleDeleteUser(user)} className="btn btn-xs bg-blue1 text-white">
                       <FaTrashAlt />
                     </button>
                   </td>
