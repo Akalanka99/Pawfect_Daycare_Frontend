@@ -3,7 +3,6 @@ import { Link, Outlet, useNavigate } from "react-router-dom";
 import { MdDashboard, MdDashboardCustomize } from "react-icons/md";
 import {
   FaEdit,
-  FaLocationArrow,
   FaPlusCircle,
   FaQuestionCircle,
   FaRegUser,
@@ -22,7 +21,7 @@ const sharedLinks = (
     </li>
     <li>
       <Link to="/shop">
-        <FaCartShopping />  Shop 
+        <FaCartShopping /> Shop
       </Link>
     </li>
     <li>
@@ -54,18 +53,18 @@ const AdminDashboard = () => {
           <span>Loading...</span>
         </div>
       ) : (
-        <div className="drawer sm:drawer-open">
+        <div className="drawer sm:drawer-open bg-white">
           <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
           <div className="drawer-content flex flex-col sm:items-start sm:justify-start my-2">
             <div className="flex items-center justify-between mx-4">
               <label
                 htmlFor="my-drawer-2"
-                className="btn bg-pink text-white drawer-button lg:hidden"
+                className="btn bg-blue2 text-white drawer-button lg:hidden"
               >
                 <MdDashboardCustomize />
               </label>
               <button
-                className="btn rounded-full px-6 bg-pink flex items-center gap-2 text-white sm:hidden"
+                className="btn rounded-full px-6 bg-blue2 flex items-center gap-2 text-white sm:hidden"
                 onClick={handleLogout}
               >
                 <FaRegUser /> Logout
@@ -75,43 +74,43 @@ const AdminDashboard = () => {
               <Outlet />
             </div>
           </div>
-          <div className="drawer-side">
+          <div className="drawer-side ">
             <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
-            <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
+            <ul className="menu p-4 w-80 min-h-full bg-blue1 text-black">
               <li>
-                <Link to="/dashboard" className="flex justify-start mb-3">
-                  <img src="/logo.png" alt="Logo" className="w-20" />
+                <Link to="/admin-dashboard" className="flex justify-start mb-3">
+                  <img src="/logo.jpg" alt="Logo" className="w-20" />
                   <span className="badge bg-black text-white">admin</span>
                 </Link>
               </li>
               <hr />
               <li className="mt-3">
-                <Link to="/dashboard">
+                <Link to="/admin-dashboard">
                   <MdDashboard /> Dashboard
                 </Link>
               </li>
               <li>
-                <Link to="/dashboard/manage-bookings">
+                <Link to="/admin-dashboard/manage-bookings">
                   <FaShoppingBag /> Manage Bookings
                 </Link>
               </li>
               <li>
-                <Link to="/dashboard/add-menu">
+                <Link to="/admin-dashboard/add-shop"> {/* FIXED */}
                   <FaPlusCircle /> Add Product
                 </Link>
               </li>
               <li>
-                <Link to="/dashboard/manage-products">
+                <Link to="/admin-dashboard/manage-product"> {/* FIXED */}
                   <FaEdit /> Manage Products
                 </Link>
               </li>
               <li>
-                <Link to="/dashboard/manage-pets">
+                <Link to="/admin-dashboard/manage-pets"> {/* Ensure this route exists */}
                   <FaEdit /> Manage Pets
                 </Link>
               </li>
               <li className="mb-3">
-                <Link to="/dashboard/Users">
+                <Link to="/admin-dashboard/users"> {/* FIXED PATH */}
                   <FaUser /> All Users
                 </Link>
               </li>
