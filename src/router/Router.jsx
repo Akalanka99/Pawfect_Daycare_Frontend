@@ -15,7 +15,13 @@ import Services from "../pages/Services";
 import SignInModal from "../components/Modal";
 import UpdatedReservationForm from "../pages/Reseverstion/UpdatedReservatioForm";
 import Shop from "../pages/Shop/Shop";
-import AdminDashboard from "../pages/adminDashboard/admin";
+import AdminDashboard from "../pages/dashboard/AdminDashboard";
+import Dashboard from "../pages/dashboard/Dashboard";
+import AddProduct from "../pages/dashboard/AddProduct";
+import ManageProducts from "../pages/dashboard/ManageProducts";
+import { Outlet } from "react-router-dom"; 
+import UpdateProduct from "../pages/dashboard/UpdateProduct";
+import Users from "../pages/dashboard/Users";
 
 const router = createBrowserRouter([
   {

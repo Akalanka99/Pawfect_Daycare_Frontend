@@ -24,7 +24,6 @@ const ProfilePage = () => {
             <div className="flex justify-between">
               <span className="font-semibold">Name:</span>
               <span>Akalanka</span>
-      
             </div>
             <div className="flex justify-between">
               <span className="font-semibold">E-mail Address:</span>
