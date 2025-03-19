@@ -1,7 +1,9 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { AuthContext } from "../../components/context/Authprovider";
 
 const ProfilePage = () => {
+  const { user } = useContext(AuthContext); // Access user data from context
+
   return (
     <div className="flex min-h-screen bg-gray-100 text-black">
 
@@ -13,7 +15,7 @@ const ProfilePage = () => {
           {/* Profile Image */}
           <div className="w-24 h-24 rounded-full bg-gray-300 flex items-center justify-center">
             <img
-              src="https://plus.unsplash.com/premium_photo-1694819488591-a43907d1c5cc?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8ZG9nfGVufDB8fDB8fHww" // Replace with actual image URL
+              src={user?.profileImage || "https://via.placeholder.com/150"}
               alt="Profile"
               className="w-full h-full rounded-full"
             />
@@ -23,11 +25,11 @@ const ProfilePage = () => {
           <div className="space-y-4 w-full max-w-sm">
             <div className="flex justify-between">
               <span className="font-semibold">Name:</span>
-              <span>Akalanka</span>
+              <span>{user?.name || "N/A"}</span>
             </div>
             <div className="flex justify-between">
               <span className="font-semibold">E-mail Address:</span>
-              <span>Akalanka@gmail.com</span>
+              <span>{user?.email || "N/A"}</span>
             </div>
             <div className="flex justify-between items-center">
               <label htmlFor="password" className="font-semibold">
@@ -36,6 +38,8 @@ const ProfilePage = () => {
               <input
                 id="password"
                 type="password"
+                value={user?.password || ""}
+                readOnly
                 className="border border-gray-300 rounded px-2 py-1 w-3/5 bg-white"
               />
             </div>

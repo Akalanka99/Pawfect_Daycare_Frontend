@@ -134,7 +134,7 @@ const UpdatedReservationForm = () => {
       await axios.post("http://localhost:8080/api/reservations", transformedData);
       
       console.log("Transformed Data:", transformedData);
-      navigate("/payment");
+      navigate("/");
     } catch (error) {
       console.error("Error submitting reservation:", error);
       alert("Failed to submit reservation. Please try again.");
