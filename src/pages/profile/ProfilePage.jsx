@@ -1,9 +1,29 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../components/context/Authprovider";
+
 
 const ProfilePage = () => {
   const { user } = useContext(AuthContext); // Access user data from context
+  const [profile, setProfile] = useState({ name: "", email: "", role: "" });
 
+  useEffect(() => {
+    if (user?.uid) {
+      fetch(`http://localhost:8080/api/user/${user.uid}`)
+        .then((response) => response.json())
+        .then((data) => {
+          if (data) {
+            setProfile({
+              name: data.name,
+              email: data.email,
+              role: data.role,
+            });
+          }
+        })
+        .catch((error) => console.error("Error fetching user profile:", error));
+    }
+  }, [user?.uid]);
+
+  const firstLetter = user?.email ? user.email.charAt(0).toUpperCase() : "?";
   return (
     <div className="flex min-h-screen bg-gray-100 text-black">
 
@@ -13,36 +33,33 @@ const ProfilePage = () => {
         
         <div className="flex flex-col items-center space-y-6">
           {/* Profile Image */}
-          <div className="w-24 h-24 rounded-full bg-gray-300 flex items-center justify-center">
-            <img
-              src={user?.profileImage || "https://via.placeholder.com/150"}
-              alt="Profile"
-              className="w-full h-full rounded-full"
-            />
+          <div className="w-10 h-10 rounded-full bg-gray-400 flex items-center justify-center text-white font-bold">
+              {user?.photoURL ? (
+                <img
+                  alt="User Profile"
+                  src={user.photoURL}
+                  className="w-full h-full rounded-full"
+                />
+              ) : (
+                <span>{firstLetter}</span>
+              )}
           </div>
 
           {/* Profile Details */}
           <div className="space-y-4 w-full max-w-sm">
             <div className="flex justify-between">
               <span className="font-semibold">Name:</span>
-              <span>{user?.name || "N/A"}</span>
+              <span>{profile.name || "No Name"}</span>
             </div>
             <div className="flex justify-between">
               <span className="font-semibold">E-mail Address:</span>
-              <span>{user?.email || "N/A"}</span>
+              <span>{profile.email || "No email"}</span>
             </div>
-            <div className="flex justify-between items-center">
-              <label htmlFor="password" className="font-semibold">
-                Password:
-              </label>
-              <input
-                id="password"
-                type="password"
-                value={user?.password || ""}
-                readOnly
-                className="border border-gray-300 rounded px-2 py-1 w-3/5 bg-white"
-              />
+            <div className="flex justify-between">
+              <span className="font-semibold">Role:</span>
+              <span>{profile.role || "No role"}</span>
             </div>
+            
           </div>
 
           {/* Action Buttons */}
