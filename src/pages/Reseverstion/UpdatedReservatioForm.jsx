@@ -103,7 +103,7 @@ const UpdatedReservationForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Transform formData into the required JSON format
+    // Create the transformed data for API
     const transformedData = {
       ownerName: formData.ownerName,
       email: formData.email,
@@ -120,13 +120,12 @@ const UpdatedReservationForm = () => {
         singleDay: formData.daycareDuration === "Single Day",
         multipleDay: formData.daycareDuration === "Multiple Day",
       },
-      cageBookings: [
-        {
-          cageId: parseInt(formData.cageId),
-          morning: formData.cages[0].morning,
-          afternoon: formData.cages[0].afternoon,
-        },
-      ],
+      cageBookings: formData.cages.map(cage => ({
+        cageId: parseInt(cage.cageId),
+        morning: cage.morning,
+        afternoon: cage.afternoon,
+      })),
+
       additionalDetails: formData.additionalDetails,
     };
 
@@ -134,10 +133,13 @@ const UpdatedReservationForm = () => {
       await axios.post("http://localhost:8080/api/reservations", transformedData);
       
       console.log("Transformed Data:", transformedData);
+       // Clear localStorage after successful submission
+      localStorage.removeItem("reservationData");
       navigate("/");
+
     } catch (error) {
       console.error("Error submitting reservation:", error);
-      alert("Failed to submit reservation. Please try again.");
+      alert("There was an error submitting your reservation. Please try again.");
     }
   };
 
