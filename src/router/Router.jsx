@@ -5,6 +5,7 @@ import PawFectReservationForm from "../pages/Reseverstion/PawFectReservationForm
 import ProfilePage from "../pages/profile/ProfilePage";
 import RegisterForm from "../components/RegisterForm";
 import AboutUs from "../pages/AboutUs";
+import ContactUs from "../pages/ContactUs";
 import BookingModal from "../pages/Reseverstion/BookingModal";
 import BookingSlot from "../pages/Reseverstion/BookingSlot";
 import PetInfo from "../pages/profile/PetInfo";
@@ -19,7 +20,7 @@ import AdminDashboard from "../pages/dashboard/AdminDashboard";
 import Dashboard from "../pages/dashboard/Dashboard";
 import AddProduct from "../pages/dashboard/AddProduct";
 import ManageProducts from "../pages/dashboard/ManageProducts";
-import { Outlet } from "react-router-dom"; 
+import { Outlet } from "react-router-dom";
 import UpdateProduct from "../pages/dashboard/UpdateProduct";
 import Users from "../pages/dashboard/Users";
 
@@ -29,68 +30,72 @@ const router = createBrowserRouter([
     element: <Main />,
     children: [
       {
-         path: "/", 
-        element: <Home /> 
-      },
-      { 
-        path: "/bookingnow", 
-        element: <PawFectReservationForm /> 
+        path: "/",
+        element: <Home />,
       },
       {
-         path: "/modal", 
-         element: <SignInModal /> 
+        path: "/bookingnow",
+        element: <PawFectReservationForm />,
       },
-      { 
+      {
+        path: "/modal",
+        element: <SignInModal />,
+      },
+      {
         path: "/registerform",
-        element: <RegisterForm /> 
+        element: <RegisterForm />,
       },
       {
-         path: "/aboutus", 
-         element: <AboutUs /> 
+        path: "/aboutus",
+        element: <AboutUs />,
       },
       {
-         path: "/booking-dog", 
-         element: <BookingModal animalType="dog" onClose={() => {}} /> 
+        path: "/contactus",
+        element: <ContactUs />,
       },
       {
-         path: "/booking-cat", 
-         element: <BookingModal animalType="cat" onClose={() => {}} /> 
+        path: "/booking-dog",
+        element: <BookingModal animalType="dog" onClose={() => {}} />,
       },
       {
-         path: "/booking-slot", 
-         element: <BookingSlot /> 
+        path: "/booking-cat",
+        element: <BookingModal animalType="cat" onClose={() => {}} />,
       },
       {
-         path: "/profile", 
-         element: <ProfilePage /> 
+        path: "/booking-slot",
+        element: <BookingSlot />,
       },
       {
-         path: "/petinfo", 
-         element: <PetInfo /> 
+        path: "/profile",
+        element: <ProfilePage />,
       },
       {
-         path: "/bookinghistory", 
-         element: <BookingHistory />
+        path: "/petinfo",
+        element: <PetInfo />,
       },
       {
-         path: "/payment", 
-         element: <PaymentPage />
+        path: "/bookinghistory",
+        element: <BookingHistory />,
       },
       {
-         path: "/updated-reservation", 
-         element: <UpdatedReservationForm /> 
+        path: "/payment",
+        element: <PaymentPage />,
       },
       {
-         path: "/shop", 
-         element: <Shop /> 
+        path: "/updated-reservation",
+        element: <UpdatedReservationForm />,
       },
       {
-         path: "/viewpayment", 
-         element: <ViewPayment /> 
+        path: "/shop",
+        element: <Shop />,
       },
       {
-         path: "/services", 
-         element: <Services /> 
+        path: "/viewpayment",
+        element: <ViewPayment />,
+      },
+      {
+        path: "/services",
+        element: <Services />,
       },
     ],
   },
@@ -98,32 +103,31 @@ const router = createBrowserRouter([
   // Admin Routes
   {
     path: "/admin-dashboard",
-    element: <AdminDashboard />, 
+    element: <AdminDashboard />,
     children: [
       {
-         path: "", 
-         element: <Dashboard /> 
-      }, 
-      {
-         path: "add-shop", 
-         element: <AddProduct /> 
-      }, 
-      {
-         path: "manage-product", 
-         element: <ManageProducts /> 
+        path: "",
+        element: <Dashboard />,
       },
       {
-         path: "update-product/:id", 
-         element: <UpdateProduct />,  // Make sure you have an UpdateProduct component
-         loader: async ({ params }) => {
-            return fetch(`http://localhost:8080/api/product/${params.id}`);
-          },  
-       }, 
-       {
-         path: "users", 
-         element: <Users/> 
+        path: "add-shop",
+        element: <AddProduct />,
       },
-
+      {
+        path: "manage-product",
+        element: <ManageProducts />,
+      },
+      {
+        path: "update-product/:id",
+        element: <UpdateProduct />, // Make sure you have an UpdateProduct component
+        loader: async ({ params }) => {
+          return fetch(`http://localhost:8080/api/product/${params.id}`);
+        },
+      },
+      {
+        path: "users",
+        element: <Users />,
+      },
     ],
   },
 ]);
