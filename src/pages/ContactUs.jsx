@@ -186,10 +186,10 @@ function ContactUs() {
       <div className="relative">
         <div className="absolute inset-0 bg-[#1d889d] opacity-70"></div>
         <div className="relative max-w-6xl mx-auto px-6 py-20 text-center z-10">
-          <h1 className="text-5xl font-bold text-[#16385e] mb-6">
+          <h1 className="text-5xl font-['Inter'] font-bold text-[#16385e] mb-6">
             Contact Pawfect Daycare
           </h1>
-          <p className="text-xl text-white max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl text-center text-[#f1fbfd] leading-relaxed">
             We're here to answer your questions and help you find the perfect
             care for your furry friend.
           </p>
@@ -268,11 +268,13 @@ function ContactUs() {
                       Hours
                     </h3>
                     <p className="text-gray-700 text-base">
-                      Mon-Fri: 7:00 AM - 7:00 PM
+                      <strong>Sunday to Saturday:</strong> 8:00 AM to 6:00 PM
                       <br />
-                      Sat: 8:00 AM - 5:00 PM
+                      <strong>Morning:</strong> 8:00 AM to 12:00 PM
                       <br />
-                      Sun: Closed
+                      <strong>Lunch/Rest Break:</strong> 12:00 PM to 1:00 PM
+                      <br />
+                      <strong>Afternoon:</strong> 1:00 PM to 6:00 PM
                     </p>
                   </div>
                 </div>
@@ -395,7 +397,7 @@ function ContactUs() {
       <section className="py-16">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-[#1b4a7b] mb-4">
+            <h2 className="text-3xl font-bold font-['Inter'] text-[#1b4a7b] mb-4">
               Find Our Location
             </h2>
             <div className="w-24 h-1 bg-[#1d889d] mx-auto mb-8"></div>
@@ -419,7 +421,7 @@ function ContactUs() {
       <section className="py-16 bg-gray-50">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-[#1b4a7b] mb-4">
+            <h2 className="text-3xl font-bold font-['Inter'] text-[#1b4a7b] mb-4">
               What Our Pet Parents Say
             </h2>
             <div className="w-24 h-1 bg-[#1d889d] mx-auto mb-8"></div>
@@ -452,7 +454,7 @@ function ContactUs() {
 
           {/* New Testimonial Submission Form */}
           <div className="bg-white p-8 rounded-lg shadow-md mt-12">
-            <h3 className="text-2xl font-bold text-center text-[#1b4a7b] mb-6">
+            <h3 className="text-2xl font-bold font-['Inter'] text-center text-[#1b4a7b] mb-6">
               Share Your Experience
             </h3>
             <form
