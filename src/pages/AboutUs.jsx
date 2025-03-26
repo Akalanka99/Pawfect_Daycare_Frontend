@@ -18,11 +18,11 @@ function AboutUs() {
       <div className="relative">
         <div className="absolute inset-0 bg-[#1d889d]  opacity-70"></div>
         <div className="relative max-w-6xl mx-auto px-6 py-20 text-center z-10">
-          <h1 className="text-5xl font-bold text-[#16385e] mb-6">
+          <h1 className="text-5xl font-bold font-['Inter']  text-[#16385e] mb-6">
             About Pawfect Daycare
           </h1>
           <div className="w-24 h-1 mx-auto mb-8"></div>
-          <p className="text-xl text-white max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl text-center text-[#f1fbfd] leading-relaxed">
             At Pawfect Daycare, we are passionate about providing a second home
             for your pets where they receive top-quality care and affection.
           </p>
@@ -34,7 +34,7 @@ function AboutUs() {
         <div className="max-w-6xl mx-auto px-6">
           <div className="flex flex-col md:flex-row gap-12">
             <div className="md:w-1/2">
-              <h2 className="text-3xl font-bold text-[#1b4a7b] text-center mb-6">
+              <h2 className="text-3xl font-bold font-['Inter'] text-[#1b4a7b] text-center mb-6">
                 Our Mission
               </h2>
               <p className="text-lg text-gray-700 leading-relaxed">
@@ -46,7 +46,7 @@ function AboutUs() {
               </p>
             </div>
             <div className="md:w-1/2">
-              <h2 className="text-3xl font-bold text-[#1b4a7b] text-center mb-6">
+              <h2 className="text-3xl font-bold font-['Inter'] text-[#1b4a7b] text-center mb-6">
                 Our Vision
               </h2>
               <p className="text-lg text-gray-700 leading-relaxed">
@@ -65,7 +65,7 @@ function AboutUs() {
       <section className="py-16">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-[#1b4a7b] mb-4">
+            <h2 className="text-3xl font-bold font-['Inter'] text-[#1b4a7b] mb-4">
               Meet Our Expert Team
             </h2>
             <div className="w-24 h-1 bg-[#1d889d] mx-auto mb-8"></div>
@@ -141,7 +141,7 @@ function AboutUs() {
       <section className="py-16 bg-blue-50">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-[#1b4a7b] mb-4">
+            <h2 className="text-3xl font-bold font-['Inter'] text-[#1b4a7b] mb-4">
               Our State-of-the-Art Facility
             </h2>
             <div className="w-24 h-1 bg-[#1d889d] mx-auto mb-8"></div>
@@ -156,7 +156,7 @@ function AboutUs() {
               />
             </div>
             <div>
-              <h3 className="text-2xl font-semibold text-[#1b4a7b] mb-4">
+              <h3 className="text-2xl font-semibold font-['Inter'] text-[#1b4a7b] mb-4">
                 Designed with Pets in Mind
               </h3>
               <p className="text-lg text-gray-700 leading-relaxed mb-6">
@@ -172,7 +172,7 @@ function AboutUs() {
               </p>
               <button
                 onClick={() => navigate("/services")}
-                className="mt-8 bg-[#1b4a7b] text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition duration-300"
+                className="mt-8 bg-[#1B4A7B] text-white py-3 px-6 rounded-lg hover:bg-[#163c66]  transition duration-300"
               >
                 Schedule a Tour
               </button>
@@ -185,7 +185,7 @@ function AboutUs() {
       <section className="py-16">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-[#1b4a7b] mb-4">
+            <h2 className="text-3xl font-bold font-['Inter'] text-[#1b4a7b] mb-4">
               Comprehensive Pet Services
             </h2>
             <div className="w-24 h-1 bg-[#728386] mx-auto mb-8"></div>
@@ -271,7 +271,7 @@ function AboutUs() {
       <section className="py-16 bg-gray-50">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-[#1b4a7b] mb-4">
+            <h2 className="text-3xl font-bold font-['Inter'] text-[#1b4a7b] mb-4">
               What Our Clients Say
             </h2>
             <div className="w-24 h-1 bg-[#1d889d] mx-auto mb-8"></div>
@@ -320,7 +320,7 @@ function AboutUs() {
       <section className="py-16">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-[#1b4a7b] mb-4">
+            <h2 className="text-3xl font-bold font-['Inter'] text-[#1b4a7b] mb-4">
               Pet Photo Gallery
             </h2>
             <div className="w-24 h-1 bg-[#1d889d] mx-auto mb-8"></div>
@@ -379,7 +379,7 @@ function AboutUs() {
       <section className="py-16 bg-gray-50">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-[#1b4a7b] mb-4">
+            <h2 className="text-3xl font-bold font-['Inter'] text-[#1b4a7b] mb-4">
               Frequently Asked Questions
             </h2>
             <div className="w-24 h-1 bg-[#1d889d] mx-auto mb-8"></div>
