@@ -118,6 +118,9 @@ const router = createBrowserRouter([
         path: "manage-product",
         element: <ManageProducts />,
       },
+      { path: "manage-bookings",
+         element: <Managebooking />
+         }, 
       {
         path:"manage-bookings",
         element: <Managebooking/>
