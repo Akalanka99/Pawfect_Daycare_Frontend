@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import { MdDashboard, MdDashboardCustomize } from "react-icons/md";
 import {
@@ -11,6 +11,7 @@ import {
 } from "react-icons/fa";
 import { FaCartShopping } from "react-icons/fa6";
 import useAuth from "../hooks/useAuth";
+import { AuthContext } from "../../components/context/Authprovider";
 
 const sharedLinks = (
   <>
@@ -34,6 +35,8 @@ const sharedLinks = (
 
 const AdminDashboard = () => {
   const { loading, logOut } = useAuth();
+  const { user } = useContext(AuthContext);
+  console.log(user)
   const navigate = useNavigate();
 
   const handleLogout = () => {

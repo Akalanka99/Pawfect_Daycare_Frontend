@@ -12,20 +12,20 @@ const Users = () => {
       return res.data;
     },
   });
-  // console.log(users);
-  const handleMakeAdmin = (user) => {
-    axiosSecure.patch(`/users/admin/${user._id}`).then((res) => {
-      alert(`${user.name} is now admin`);
+  console.log(users);
+  const handleMakeStaff = (user) => {
+    axiosSecure.put(`/api/users/assign/${user.uid}`).then((res) => {
+      alert(`${user.name} is now staff`);
       refetch();
     });
   };
 
-  const handleDeleteUser = user => {
-    axiosSecure.delete(`/users/${user._id}`).then(res => {
+  const handleDeleteUser = (user) => {
+    axiosSecure.delete(`/api/users/${user.id}`).then((res) => {
       alert(`${user.name} is removed from database`);
       refetch();
-    })
-  }
+    });
+  };
   return (
     <div>
       <div className="flex items-center justify-between m-4">
@@ -54,17 +54,22 @@ const Users = () => {
                   <td>{user.name}</td>
                   <td>{user.email}</td>
                   <td>
-                    {user.role === "admin" ? "Admin" : (
+                    {user.role === "USER" ? (
                       <button
-                        onClick={() => handleMakeAdmin(user)}
+                        onClick={() => handleMakeStaff(user)}
                         className="btn btn-xs btn-circle bg-blue1 text-white"
                       >
                         <FaUsers />
                       </button>
+                    ) : (
+                      user.role
                     )}
                   </td>
                   <td>
-                    <button onClick={() => handleDeleteUser(user)} className="btn btn-xs bg-blue1 text-white">
+                    <button
+                      onClick={() => handleDeleteUser(user)}
+                      className="btn btn-xs bg-blue1 text-white"
+                    >
                       <FaTrashAlt />
                     </button>
                   </td>

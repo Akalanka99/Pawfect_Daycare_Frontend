@@ -26,7 +26,6 @@ const Authprovider = ({children}) => {
       });
       const data = await response.json();
       setRole(data.role);
-      console.log('Backend response:', data);
     } catch (error) {
       console.error('Error verifying token with backend:', error);
     }
