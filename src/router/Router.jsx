@@ -23,6 +23,7 @@ import ManageProducts from "../pages/dashboard/ManageProducts";
 import { Outlet } from "react-router-dom";
 import UpdateProduct from "../pages/dashboard/UpdateProduct";
 import Users from "../pages/dashboard/Users";
+import Managebooking from "../pages/dashboard/Managebooking";
 
 const router = createBrowserRouter([
   {
@@ -117,6 +118,9 @@ const router = createBrowserRouter([
         path: "manage-product",
         element: <ManageProducts />,
       },
+      { path: "manage-bookings",
+         element: <Managebooking />
+         }, 
       {
         path: "update-product/:id",
         element: <UpdateProduct />, // Make sure you have an UpdateProduct component

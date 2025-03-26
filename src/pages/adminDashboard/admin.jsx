@@ -91,7 +91,7 @@ const AdminDashboard = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/dashboard/manage-bookings">
+              <Link to="/dashboard/manage-bookings">
                   <FaShoppingBag /> Manage Bookings
                 </Link>
               </li>
@@ -100,11 +100,11 @@ const AdminDashboard = () => {
                   <FaPlusCircle /> Add Shop Menu
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link to="/dashboard/manage-pets">
                   <FaEdit /> Manage Pets
                 </Link>
-              </li>
+              </li> */}
               <li className="mb-3">
                 <Link to="/dashboard/users">
                   <FaUser /> All Users
