@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../layout/Main";
 import Home from "../pages/home/Home";
@@ -142,3 +143,5 @@ const router = createBrowserRouter([
 ]);
 
 export default router;
+=======
+>>>>>>> c47f72e19e3452586051eda09fae7e95e331cb50
