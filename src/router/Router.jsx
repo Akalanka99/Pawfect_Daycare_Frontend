@@ -19,17 +19,10 @@ import AdminDashboard from "../pages/dashboard/AdminDashboard";
 import Dashboard from "../pages/dashboard/Dashboard";
 import AddProduct from "../pages/dashboard/AddProduct";
 import ManageProducts from "../pages/dashboard/ManageProducts";
-<<<<<<< HEAD
 import UpdateProduct from "../pages/dashboard/UpdateProduct";
 import Users from "../pages/dashboard/Users";
 import Managebooking from "../pages/dashboard/Managebooking";
 import CustomerSupport from "../pages/dashboard/CustomerSupport";
-=======
-import { Outlet } from "react-router-dom";
-import UpdateProduct from "../pages/dashboard/UpdateProduct";
-import Users from "../pages/dashboard/Users";
-import Managebooking from "../pages/dashboard/Managebooking";
->>>>>>> bce6f7b9dabf9c0d8418b554041e94d1310f4a36
 
 const router = createBrowserRouter([
   {
@@ -107,6 +100,7 @@ const router = createBrowserRouter([
     ],
   },
 
+  //admin routes
   // Admin Routes
   {
     path: "/admin-dashboard",
@@ -124,7 +118,6 @@ const router = createBrowserRouter([
         path: "manage-product",
         element: <ManageProducts />,
       },
-<<<<<<< HEAD
       {
         path: "manage-bookings",
         element: <Managebooking />,
@@ -132,19 +125,6 @@ const router = createBrowserRouter([
       {
         path: "update-product/:id",
         element: <UpdateProduct />,
-=======
-      { path: "manage-bookings",
-         element: <Managebooking />
-         }, 
-      {
-        path:"manage-bookings",
-        element: <Managebooking/>
-
-      },
-      {
-        path: "update-product/:id",
-        element: <UpdateProduct />, // Make sure you have an UpdateProduct component
->>>>>>> bce6f7b9dabf9c0d8418b554041e94d1310f4a36
         loader: async ({ params }) => {
           return fetch(`http://localhost:8080/api/product/${params.id}`);
         },
@@ -152,20 +132,13 @@ const router = createBrowserRouter([
       {
         path: "users",
         element: <Users />,
-<<<<<<< HEAD
       },
       {
         path: "customer-support", // Remove the duplicate route and keep this one
         element: <CustomerSupport />,
-=======
->>>>>>> bce6f7b9dabf9c0d8418b554041e94d1310f4a36
       },
     ],
   },
 ]);
 
-<<<<<<< HEAD
 export default router;
-=======
-export default router;
->>>>>>> bce6f7b9dabf9c0d8418b554041e94d1310f4a36
