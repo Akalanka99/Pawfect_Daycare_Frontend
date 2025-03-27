@@ -1,97 +1,104 @@
 import React, { useState } from "react";
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+
 
 const PaymentPage = () => {
-  const [totalPayment, setTotalPayment] = useState(12000);
-  const [paymentMethod, setPaymentMethod] = useState("Credit/Debit Card");
+    const [orderID, setOrderID] = useState(null);
+    const [isPaid, setIsPaid] = useState(false);
+    const [error, setError] = useState(null);
 
-  return (
-    <div className="min-h-screen bg-blue-50 flex flex-col items-center">
+    // Define booking details
+    const bookingDetails = {
+        service: "Pet Daycare - Full Day",
+        date: "2025-04-10",
+        amount: "20.00", // USD
+    };
 
-      {/* Main Content */}
-      <main className="w-full max-w-4xl bg-white shadow-md mt-8 rounded-lg p-8 text-black">
-      <h1 className="text-3xl font-bold text-center mb-8">Profile</h1>
-        <section>
-          <h2 className="text-xl font-semibold mb-4">For Dog</h2>
-          <div className="bg-blue-100 p-4 rounded-md">
-            <p>Price per Day: <span className="font-bold">LKR 2500</span></p>
-            <p>Price per Week: <span className="font-bold">LKR 15000</span></p>
-            <p>Price per Month: <span className="font-bold">LKR 55000</span></p>
-          </div>
-        </section>
+    // Create PayPal Order
+    const createOrder = async () => {
+        try {
+            const response = await fetch("http://localhost:8080/api/paypal/create-order", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ amount: bookingDetails.amount }),
+            });
+            const data = await response.json();
+            console.log("Order created:", data); // Add this to debug
+            setOrderID(data.id); // Save Order ID for further processing
+            return data.id; // Return the orderID here
+        } catch (err) {
+            console.error("Error creating order:", err);
+            setError("Could not create order.");
+        }
+    };
 
-        <section className="mt-8">
-          <h2 className="text-xl font-semibold mb-4">For Cat</h2>
-          <div className="bg-blue-100 p-4 rounded-md">
-            <p>Price per Day: <span className="font-bold">LKR 2000</span></p>
-            <p>Price per Week: <span className="font-bold">LKR 12000</span></p>
-            <p>Price per Month: <span className="font-bold">LKR 45000</span></p>
-          </div>
-        </section>
+    // Capture Payment after approval
+    const onApprove = async (data) => {
+        try {
+            const response = await fetch(`http://localhost:8080/api/paypal/capture-payment/${data.orderID}`, {
+                method: "POST",
+            });
+            const result = await response.json();
+            
+            if (result.status === "COMPLETED") {
+                setIsPaid(true);
+                alert("Payment successful! 🎉");
+            } else {
+                alert("Payment failed.");
+            }
+        } catch (err) {
+            console.error("Error capturing payment:", err);
+            setError("Payment could not be processed.");
+        }
+    };
 
-        <p className="mt-8 text-sm text-gray-600">
-          * Prices may change depending on the level of care, size, and any additional services.
-        </p>
+    return (
+        <PayPalScriptProvider options={{ "client-id": "ATgMKLV-WkANS2juK8nUIeBW941YrfDEfHHuuLUCuydzE7D8SNlisaNKkGwpoCsTMuUAVIsVJDetgXCP" }}>
+            <div className="payment-container">
+            <style>
+        {`
+          .payment-container {
+            text-align: center;
+            padding: 20px;
+          }
+          .paypal-container {
+            text-align: center;
+            margin-top: 20px;
+          }
+          .error {
+            color: red;
+            font-weight: bold;
+          }
+          .checkout-container {
+            text-align: center;
+            padding: 20px;
+          }
+        `}
+      </style>
+                <h1>Booking Payment</h1>
 
-        <hr className="my-8" />
+                {!isPaid ? (
+                    <>
+                        <h2>Booking Details</h2>
+                        <p><strong>Service:</strong> {bookingDetails.service}</p>
+                        <p><strong>Date:</strong> {bookingDetails.date}</p>
+                        <p><strong>Amount:</strong> ${bookingDetails.amount} USD</p>
 
-        <div className="text-right">
-          <p className="text-lg font-semibold">Total Payment Due: <span className="text-blue-600">LKR {totalPayment}</span></p>
-        </div>
+                        {error && <p className="error">{error}</p>}
 
-        <form className="mt-8">
-          <label className="block font-medium mb-2">Payment Method:</label>
-          <select
-            className="w-full border rounded-md p-2 mb-4"
-            value={paymentMethod}
-            onChange={(e) => setPaymentMethod(e.target.value)}
-          >
-            <option>Credit/Debit Card</option>
-            <option>PayPal</option>
-            <option>Bank Transfer</option>
-          </select>
-
-          {paymentMethod === "Credit/Debit Card" && (
-            <>
-              <label className="block font-medium mb-2">Cardholder Name:</label>
-              <input type="text" className="w-full border rounded-md p-2 mb-4" />
-
-              <label className="block font-medium mb-2">Card Number:</label>
-              <input type="text" className="w-full border rounded-md p-2 mb-4" />
-
-              <label className="block font-medium mb-2">Expiration Date:</label>
-              <input type="text" className="w-full border rounded-md p-2 mb-4" placeholder="MM/YY" />
-
-              <label className="block font-medium mb-2">CVV:</label>
-              <input type="text" className="w-full border rounded-md p-2 mb-4" />
-            </>
-          )}
-
-          {paymentMethod === "Bank Transfer" && (
-            <div>
-              <label className="block font-medium mb-2">Bank Account Number:</label>
-              <input type="text" className="w-full border rounded-md p-2 mb-4" />
+                        <h2>Proceed to Payment</h2>
+                        <PayPalButtons 
+                            createOrder={createOrder}
+                            onApprove={onApprove}
+                            onError={(err) => setError("Payment error: " + err.message)}
+                        />
+                    </>
+                ) : (
+                    <h2>✅ Payment Successful! Thank you for your booking.</h2>
+                )}
             </div>
-          )}
-
-          <button
-            type="submit"
-            className="w-full bg-blue-600 text-white font-semibold py-2 rounded-md hover:bg-blue-700"
-          >
-            Pay Now
-          </button>
-        </form>
-
-        <p className="mt-4 text-center text-green-600">Thank You! Your Payment Was Successful.</p>
-      </main>
-
-      {/* Footer */}
-      <footer className="w-full bg-blue-900 text-white py-4 mt-auto">
-        <div className="max-w-4xl mx-auto text-center">
-          <p>© 2025 PAWFECT. All Rights Reserved.</p>
-        </div>
-      </footer>
-    </div>
-  );
+        </PayPalScriptProvider>
+    );
 };
 
 export default PaymentPage;
