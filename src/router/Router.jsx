@@ -20,10 +20,10 @@ import AdminDashboard from "../pages/dashboard/AdminDashboard";
 import Dashboard from "../pages/dashboard/Dashboard";
 import AddProduct from "../pages/dashboard/AddProduct";
 import ManageProducts from "../pages/dashboard/ManageProducts";
-import { Outlet } from "react-router-dom";
 import UpdateProduct from "../pages/dashboard/UpdateProduct";
 import Users from "../pages/dashboard/Users";
 import Managebooking from "../pages/dashboard/Managebooking";
+import CustomerSupport from "../pages/dashboard/CustomerSupport";
 
 const router = createBrowserRouter([
   {
@@ -118,17 +118,13 @@ const router = createBrowserRouter([
         path: "manage-product",
         element: <ManageProducts />,
       },
-      { path: "manage-bookings",
-         element: <Managebooking />
-         }, 
       {
-        path:"manage-bookings",
-        element: <Managebooking/>
-
+        path: "manage-bookings",
+        element: <Managebooking />,
       },
       {
         path: "update-product/:id",
-        element: <UpdateProduct />, // Make sure you have an UpdateProduct component
+        element: <UpdateProduct />,
         loader: async ({ params }) => {
           return fetch(`http://localhost:8080/api/product/${params.id}`);
         },
@@ -136,6 +132,10 @@ const router = createBrowserRouter([
       {
         path: "users",
         element: <Users />,
+      },
+      {
+        path: "customer-support", // Remove the duplicate route and keep this one
+        element: <CustomerSupport />,
       },
     ],
   },
