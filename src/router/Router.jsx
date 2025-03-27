@@ -78,7 +78,7 @@ const router = createBrowserRouter([
         path:"/shop",
         element:<Shop/>
       },
-
+      {
         path:"/viewpayment",
         element:<ViewPayment/>
       },
