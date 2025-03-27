@@ -21,7 +21,7 @@ const ManageBooking = () => {
       confirmButtonText: "Yes, delete it!",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        const res = await axiosSecure.delete(`/api/cage-bookings/${bookingId}`);
+        const res = await axiosSecure.delete(`/api/cage-bookings/${id}`);
         if (res) {
           refetch();
           Swal.fire({
@@ -45,8 +45,8 @@ const ManageBooking = () => {
           <thead>
             <tr>
               <th>#</th>
-              <th>Cage ID</th>
               <th>Booking Date</th>
+              <th>Cage ID</th>
               <th>Morning</th>
               <th>Afternoon</th>
               <th>Edit</th>
@@ -63,11 +63,11 @@ const ManageBooking = () => {
                   <td>{booking.morning ? "Yes" : "No"}</td>
                   <td>{booking.afternoon ? "Yes" : "No"}</td>
                   <td>
-                    <Link to={`/admin-dashboard/update-booking/${booking.id}`}>
+                    {/* <Link to={`/admin-dashboard/update-booking/${booking.id}`}>
                       <button className="btn btn-ghost btn-xs bg-blue1 text-white">
                         <FaEdit />
                       </button>
-                    </Link>
+                    </Link> */}
                   </td>
                   <td>
                     <button
