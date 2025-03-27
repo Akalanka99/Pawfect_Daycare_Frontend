@@ -1,19 +1,19 @@
-import React, { useContext } from "react";
-import { AuthContext } from './context/Authprovider';
-
+import React, { useContext, useState } from "react";
+import { AuthContext } from "./context/Authprovider";
 
 function Profile() {
-  const { user, logOut } = useContext(AuthContext); // Get user from context
+  const { user, role, logOut } = useContext(AuthContext); // Get user from context
+  const [imageError, setImageError] = useState(false);
 
   const handleLogout = async () => {
     try {
-        await logOut();
-        console.log("User logged out successfully");
-        localStorage.removeItem('auth');
+      await logOut();
+      console.log("User logged out successfully");
+      localStorage.removeItem("auth");
     } catch (error) {
-        console.error("Logout failed:", error.message);
+      console.error("Logout failed:", error.message);
     }
-};
+  };
 
   // Extract the first letter of the email as a fallback avatar
   const firstLetter = user?.email ? user.email.charAt(0).toUpperCase() : "?";
@@ -28,15 +28,18 @@ function Profile() {
             htmlFor="my-drawer-4"
             className="drawer-button btn btn-ghost btn-circle avatar"
           >
-            <div className="w-10 h-10 rounded-full bg-gray-400 flex items-center justify-center text-white font-bold">
-              {user?.photoURL ? (
+            <div className="w-10 h-10 rounded-full bg-[#228B22] flex items-center justify-center text-white font-bold overflow-hidden">
+              {user?.photoURL && !imageError ? (
                 <img
                   alt="User Profile"
                   src={user.photoURL}
-                  className="w-full h-full rounded-full"
+                  className="w-full h-full object-cover"
+                  onError={() => setImageError(true)}
                 />
               ) : (
-                <span>{firstLetter}</span>
+                <span className="text-lg flex items-center justify-center w-full h-full">
+                  {firstLetter}
+                </span>
               )}
             </div>
           </label>
@@ -51,16 +54,21 @@ function Profile() {
           ></label>
           <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
             <li>
-              <a href = "/profile">Profile</a>
+              <a href="/profile">Profile</a>
+            </li>
+            {(role === "ADMIN" || role === "STAFF") && (
+              <li>
+                <a href="/admin-dashboard">Dashboard</a>
+              </li>
+            )}
+            <li>
+              <a href="/petinfo">Pet Information</a>
             </li>
             <li>
-              <a href = "/petinfo">Pet Information</a>
+              <a href="/bookinghistory">Booking History</a>
             </li>
             <li>
-              <a href = "/bookinghistory">Booking History</a>
-            </li>
-            <li>
-              <a href = "/payment">Payment</a>
+              <a href="/payment">Payment</a>
             </li>
             <li>
               <a>Settings</a>

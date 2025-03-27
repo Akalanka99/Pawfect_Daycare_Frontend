@@ -33,16 +33,19 @@ const Navbar = () => {
       </li>
       <li>
         <a
-          href="shop"
+          href="services"
           className="hover:text-gray-300 text-center text-white text-[18px] font-medium font-['Inter'] leading-[30px]"
         >
-          Shop
+          Services
         </a>
       </li>
       <li>
-        <a href="services" 
+        <a
+          href="shop"
           className="hover:text-gray-300 text-center text-white text-[18px] font-medium font-['Inter'] leading-[30px]"
-        >Services</a>
+        >
+          Pet Shop
+        </a>
       </li>
       <li>
         <a
@@ -50,6 +53,14 @@ const Navbar = () => {
           className="hover:text-gray-300 text-center text-white text-[18px] font-medium font-['Inter'] leading-[30px]"
         >
           About Us
+        </a>
+      </li>
+      <li>
+        <a
+          href="contactus"
+          className="hover:text-gray-300 text-center text-white text-[18px] font-medium font-['Inter'] leading-[30px]"
+        >
+          Contact Us
         </a>
       </li>
     </>
