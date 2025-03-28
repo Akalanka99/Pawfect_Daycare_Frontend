@@ -172,8 +172,8 @@ const SignInModal = () => {
                 <button
                   type="button"
                   onClick={handleGoogle}
-                  //disabled={loading}
-                  className="w-full bg-red-500 text-white py-2 rounded-md mt-4 hover:bg-red-600 transition duration-300"
+                  disabled={loading}
+                  className="w-full bg-red-500 text-white py-2 rounded-md mt-4  bg-red transition duration-300"
                 >
                   {loading ? "Signing in..." : "Sign in with Google"}
                 </button>
