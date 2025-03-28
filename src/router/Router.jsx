@@ -121,11 +121,7 @@ const router = createBrowserRouter([
       { path: "manage-bookings",
          element: <Managebooking />
          }, 
-      {
-        path:"manage-bookings",
-        element: <Managebooking/>
-
-      },
+      
       {
         path: "update-product/:id",
         element: <UpdateProduct />, // Make sure you have an UpdateProduct component
