@@ -133,6 +133,7 @@ const UpdatedReservationForm = () => {
       console.log("Transformed Data:", transformedData);
       // Clear localStorage after successful submission
       localStorage.removeItem("reservationData");
+      alert("Booking submitted successfully!");
       navigate("/");
     } catch (error) {
       console.error("Error submitting reservation:", error);
