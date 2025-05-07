@@ -25,18 +25,18 @@ const sharedLinks = (
         <FaCartShopping /> Shop
       </Link>
     </li>
-    <li>
+    {/* <li>
       <Link to="/customer-support">
         <FaQuestionCircle /> Customer Support
       </Link>
-    </li>
+    </li> */}
   </>
 );
 
 const AdminDashboard = () => {
   const { loading, logOut } = useAuth();
   const { user } = useContext(AuthContext);
-  console.log(user)
+  console.log(user);
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -78,7 +78,11 @@ const AdminDashboard = () => {
             </div>
           </div>
           <div className="drawer-side ">
-            <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
+            <label
+              htmlFor="my-drawer-2"
+              aria-label="close sidebar"
+              className="drawer-overlay"
+            ></label>
             <ul className="menu p-4 w-80 min-h-full bg-blue1 text-black">
               <li>
                 <Link to="/admin-dashboard" className="flex justify-start mb-3">
@@ -98,23 +102,38 @@ const AdminDashboard = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/admin-dashboard/add-shop"> {/* FIXED */}
+                <Link to="/admin-dashboard/add-shop">
+                  {" "}
+                  {/* FIXED */}
                   <FaPlusCircle /> Add Product
                 </Link>
               </li>
               <li>
-                <Link to="/admin-dashboard/manage-product"> {/* FIXED */}
+                <Link to="/admin-dashboard/manage-product">
+                  {" "}
+                  {/* FIXED */}
                   <FaEdit /> Manage Products
                 </Link>
               </li>
               <li>
-                <Link to="/admin-dashboard/manage-pets"> {/* Ensure this route exists */}
+                <Link to="/admin-dashboard/manage-pets">
+                  {" "}
+                  {/* Ensure this route exists */}
                   <FaEdit /> Manage Pets
                 </Link>
               </li>
               <li className="mb-3">
-                <Link to="/admin-dashboard/users"> {/* FIXED PATH */}
+                <Link to="/admin-dashboard/users">
+                  {" "}
+                  {/* FIXED PATH */}
                   <FaUser /> All Users
+                </Link>
+              </li>
+              <li className="mb-3">
+                <Link to="/admin-dashboard/customer-support">
+                  {" "}
+                  {/* FIXED PATH */}
+                  <FaUser /> Customer Support
                 </Link>
               </li>
               <hr />
