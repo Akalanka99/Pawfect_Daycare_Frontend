@@ -15,8 +15,8 @@ function CustomerSupport() {
         setLoading(true);
         const endpoint =
           filter === "unread"
-            ? "http://localhost:8080/api/messages/unread"
-            : "http://localhost:8080/api/messages/getmessages";
+            ? "http://34.121.231.195:8080/api/messages/unread"
+            : "http://34.121.231.195:8080/api/messages/getmessages";
 
         const response = await axios.get(endpoint);
         setMessages(response.data);
@@ -34,7 +34,7 @@ function CustomerSupport() {
 
   const markAsRead = async (messageId) => {
     try {
-      await axios.put(`http://localhost:8080/api/messages/${messageId}/read`);
+      await axios.put(`http://34.121.231.195:8080/api/messages/${messageId}/read`);
       setMessages(
         messages.map((msg) =>
           msg.id === messageId ? { ...msg, read: true } : msg
@@ -150,7 +150,7 @@ function CustomerSupport() {
                     const replyMessage = e.target.replyMessage.value;
                     try {
                       await axios.post(
-                        "http://localhost:8080/api/messages/reply",
+                        "http://34.121.231.195:8080/api/messages/reply",
                         {
                           email: selectedMessage.email,
                           message: replyMessage,

@@ -121,7 +121,7 @@ const UpdatedReservationForm = () => {
 
     try {
       await axios.post(
-        "http://localhost:8080/api/reservations",
+        "http://34.121.231.195:8080/api/reservations",
         transformedData
       );
 

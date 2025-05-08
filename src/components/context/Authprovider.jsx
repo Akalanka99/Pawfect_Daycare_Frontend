@@ -17,7 +17,7 @@ const Authprovider = ({children}) => {
      // Function to send the Firebase ID token to the backend for verification
   const verifyTokenWithBackend = async (idToken) => {
     try {
-      const response = await fetch('http://localhost:8080/api/verify-token', {
+      const response = await fetch('http://34.121.231.195:8080/api/verify-token', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

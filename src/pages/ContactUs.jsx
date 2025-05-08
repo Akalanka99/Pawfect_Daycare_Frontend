@@ -95,7 +95,7 @@ function ContactUs() {
 
       // Axios POST request with JSON body
       const response = await axios.post(
-        "http://localhost:8080/api/messages/sendmessage",
+        "http://34.121.231.195:8080/api/messages/sendmessage",
         payload, // Data sent in the body
         {
           headers: {

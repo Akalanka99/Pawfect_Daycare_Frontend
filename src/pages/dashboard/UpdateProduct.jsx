@@ -75,7 +75,7 @@ const UpdateProduct = () => {
 
       // Send update request to backend
       const response = await axios.put(
-        `http://localhost:8080/api/product/${item.id}`,
+        `http://34.121.231.195:8080/api/product/${item.id}`,
         updatedProduct
       );
 
