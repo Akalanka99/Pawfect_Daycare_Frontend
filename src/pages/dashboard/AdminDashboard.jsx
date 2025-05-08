@@ -58,23 +58,25 @@ const AdminDashboard = () => {
       ) : (
         <div className="drawer sm:drawer-open bg-white">
           <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-          <div className="drawer-content flex flex-col sm:items-start sm:justify-start my-2">
-            <div className="flex items-center justify-between mx-4">
-              <label
-                htmlFor="my-drawer-2"
-                className="btn bg-blue2 text-white drawer-button lg:hidden"
-              >
-                <MdDashboardCustomize />
-              </label>
-              <button
-                className="btn rounded-full px-6 bg-blue2 flex items-center gap-2 text-white sm:hidden"
-                onClick={handleLogout}
-              >
-                <FaRegUser /> Logout
-              </button>
-            </div>
-            <div className="mt-5 md:mt-2 mx-4">
-              <Outlet />
+          <div className="drawer-content flex flex-col sm:items-start sm:justify-start ">
+            <div className=" w-full">
+              {/* <div className="flex items-start  mx-4">
+                <label
+                  htmlFor="my-drawer-2"
+                  className="btn bg-blue2 text-white drawer-button lg:hidden"
+                >
+                  <MdDashboardCustomize />
+                </label>
+                <button
+                  className="btn rounded-full px-6 bg-blue2 flex items-center gap-2 text-white sm:hidden"
+                  onClick={handleLogout}
+                >
+                  <FaRegUser /> Logout
+                </button>
+              </div> */}
+              <div className="w-full justify-start items-start  ">
+                <Outlet />
+              </div>
             </div>
           </div>
           <div className="drawer-side ">
