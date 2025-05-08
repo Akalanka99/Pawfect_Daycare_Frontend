@@ -105,6 +105,11 @@ function ContactUs() {
       );
 
       console.log("Response:", response.data);
+      setFormStatus({
+        submitted: true,
+        error: false,
+        message: "Thank you for your message! We'll get back to you soon.",
+      });
 
       // Reset form after successful submission
       setFormData({
@@ -117,6 +122,13 @@ function ContactUs() {
       toast.success("Message sent successfully!");
     } catch (error) {
       console.error("Error sending message:", error);
+      setFormStatus({
+        submitted: false,
+        error: true,
+        message: "Failed to send message. Please try again.",
+      });
+      // Show error notification
+
       toast.error("Failed to send message. Please try again.");
     }
   };
