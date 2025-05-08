@@ -191,7 +191,118 @@ const UpdatedReservationForm = () => {
           onChange={handleInputChange}
           required
         />
-        {/* Other input fields */}
+        <InputField
+          label="E-mail Address"
+          name="email"
+          type="email"
+          value={formData.email}
+          onChange={handleInputChange}
+          required
+        />
+        <InputField
+          label="Home Address"
+          name="homeaddress"
+          type="text"
+          value={formData.homeaddress}
+          onChange={handleInputChange}
+          required
+        />
+        <InputField
+          label="Phone Number"
+          name="phoneNumber"
+          type="tel"
+          value={formData.phoneNumber}
+          onChange={handleInputChange}
+          required
+        />
+        <InputField
+          label="Emergency Contact"
+          name="emergencyContact"
+          type="text"
+          value={formData.emergencyContact}
+          onChange={handleInputChange}
+          required
+        />
+        <InputField
+          label="Pet Category"
+          name="petCategory"
+          type="text"
+          value={formData.petCategory}
+          onChange={handleInputChange}
+          placeholder="Enter 'Dog' or 'Cat'"
+          required
+        />
+        {formData.petCategory?.toLowerCase() === "dog" && (
+          <>
+            <InputField
+              label="Dog's Name"
+              name="petName"
+              type="text"
+              value={formData.petName}
+              onChange={handleInputChange}
+              required
+            />
+            <InputField
+              label="Dog's Breed"
+              name="petBreed"
+              type="text"
+              value={formData.petBreed}
+              onChange={handleInputChange}
+              required
+            />
+          </>
+        )}
+        {formData.petCategory?.toLowerCase() === "cat" && (
+          <>
+            <InputField
+              label="Cat's Name"
+              name="petName"
+              type="text"
+              value={formData.petName}
+              onChange={handleInputChange}
+              required
+            />
+            <InputField
+              label="Cat's Breed"
+              name="petBreed"
+              type="text"
+              value={formData.petBreed}
+              onChange={handleInputChange}
+              required
+            />
+          </>
+        )}
+        <InputField
+          label="Age"
+          name="age"
+          type="number"
+          value={formData.age}
+          onChange={handleInputChange}
+          required
+        />
+        <InputField
+          label="Daycare Duration"
+          name="daycareDuration"
+          type="text"
+          value={formData.daycareDuration}
+          onChange={handleInputChange}
+          placeholder="Enter 'Single Day' or 'Multiple Day'"
+          required
+        />
+        <InputField
+          label="Additional Care Details"
+          name="additionalDetails"
+          type="text"
+          value={formData.additionalDetails}
+          onChange={handleInputChange}
+          placeholder="Share any dietary needs or special care instructions."
+        />
+        <div className="mb-4">
+          <label className="text-sm text-gray-700">
+            <input type="checkbox" required className="mr-2" />I acknowledge and
+            agree to the terms and conditions of the daycare service.
+          </label>
+        </div>
         <button
           type="submit"
           className="w-full bg-[#1B4A7B] text-white py-2 px-4 rounded hover:bg-[#58B5C6] transition duration-300"
