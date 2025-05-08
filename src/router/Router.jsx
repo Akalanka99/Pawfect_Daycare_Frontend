@@ -13,7 +13,7 @@ import BookingHistory from "../pages/profile/BookingHistory";
 import ViewPayment from "../pages/Payment/ViewPayment";
 import Services from "../pages/Services";
 import SignInModal from "../components/Modal";
-import UpdatedReservationForm from "../pages/Reseverstion/UpdatedReservationForm";
+import UpdatedReservationForm from "../pages/Reseverstion/UpdatedReservatioForm";
 import Shop from "../pages/Shop/Shop";
 import AdminDashboard from "../pages/dashboard/AdminDashboard";
 import Dashboard from "../pages/dashboard/Dashboard";
@@ -118,7 +118,6 @@ const router = createBrowserRouter([
         path: "manage-product",
         element: <ManageProducts />,
       },
-      { path: "manage-bookings", element: <Managebooking /> },
       {
         path: "manage-bookings",
         element: <Managebooking />,
