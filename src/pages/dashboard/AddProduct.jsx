@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import axios from "axios";
 import { FaPlus } from "react-icons/fa";
+const API_URL=process.env.VITE_API_URL;
+
 
 const AddProduct = () => {
   const { register, handleSubmit, reset } = useForm();
@@ -55,7 +57,7 @@ const AddProduct = () => {
 
         // Send product data to backend
         const response = await axios.post(
-          "http://34.121.231.195:8080/api/product",
+          `${API_URL}/api/product`,
           newProduct
         );
 

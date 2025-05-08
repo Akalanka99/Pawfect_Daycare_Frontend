@@ -4,6 +4,8 @@ import { useForm } from "react-hook-form";
 import { FaPlug } from "react-icons/fa";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+const API_URL=process.env.VITE_API_URL;
+
 
 const UpdateProduct = () => {
   const loadedItem = useLoaderData(); // Load product data
@@ -75,7 +77,7 @@ const UpdateProduct = () => {
 
       // Send update request to backend
       const response = await axios.put(
-        `http://34.121.231.195:8080/api/product/${item.id}`,
+        `${API_URL}/api/product/${item.id}`,
         updatedProduct
       );
 

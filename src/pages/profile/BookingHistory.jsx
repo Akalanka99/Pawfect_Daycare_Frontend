@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import jsPDF from "jspdf";
 import axios from "axios";
+const API_URL=process.env.VITE_API_URL;
 
 const BookingHistory = () => {
   const [bookings, setBookings] = useState([]);
@@ -9,7 +10,7 @@ const BookingHistory = () => {
   useEffect(() => {
     const fetchBookings = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/api/bookings");
+        const response = await axios.get(`${API_URL}/api/bookings`);
         setBookings(response.data); // Assuming the API returns an array of bookings
       } catch (error) {
         console.error("Error fetching booking history:", error);

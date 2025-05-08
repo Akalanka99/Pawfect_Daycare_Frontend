@@ -7,6 +7,8 @@ import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStat
  export const AuthContext = createContext();
 const auth = getAuth(app);
 const googleprovider = new GoogleAuthProvider();
+const API_URL=process.env.VITE_API_URL;
+
 
 
 const Authprovider = ({children}) => {
@@ -17,7 +19,7 @@ const Authprovider = ({children}) => {
      // Function to send the Firebase ID token to the backend for verification
   const verifyTokenWithBackend = async (idToken) => {
     try {
-      const response = await fetch('http://34.121.231.195:8080/api/verify-token', {
+      const response = await fetch(`${API_URL}/api/verify-token`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

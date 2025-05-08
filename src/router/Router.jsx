@@ -118,7 +118,7 @@ const router = createBrowserRouter([
         path: "update-product/:id",
         element: <UpdateProduct />,
         loader: async ({ params }) => {
-          return fetch(`http://34.121.231.195:8080/api/product/${params.id}`);
+          return fetch(`${API_URL}/api/product/${params.id}`);
         },
       },
       { path: "manage-bookings",

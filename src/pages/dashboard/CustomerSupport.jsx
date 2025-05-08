@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
+const API_URL=process.env.VITE_API_URL;
+
 
 function CustomerSupport() {
   const [messages, setMessages] = useState([]);
@@ -15,8 +17,8 @@ function CustomerSupport() {
         setLoading(true);
         const endpoint =
           filter === "unread"
-            ? "http://34.121.231.195:8080/api/messages/unread"
-            : "http://34.121.231.195:8080/api/messages/getmessages";
+            ? `${API_URL}/api/messages/unread`
+            : `${API_URL}/api/messages/getmessages`;
 
         const response = await axios.get(endpoint);
         setMessages(response.data);
@@ -34,7 +36,7 @@ function CustomerSupport() {
 
   const markAsRead = async (messageId) => {
     try {
-      await axios.put(`http://34.121.231.195:8080/api/messages/${messageId}/read`);
+      await axios.put(`${API_URL}/api/messages/${messageId}/read`);
       setMessages(
         messages.map((msg) =>
           msg.id === messageId ? { ...msg, read: true } : msg
@@ -150,7 +152,7 @@ function CustomerSupport() {
                     const replyMessage = e.target.replyMessage.value;
                     try {
                       await axios.post(
-                        "http://34.121.231.195:8080/api/messages/reply",
+                        `${API_URL}/api/messages/reply`,
                         {
                           email: selectedMessage.email,
                           message: replyMessage,
