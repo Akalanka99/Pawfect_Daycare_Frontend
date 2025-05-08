@@ -138,48 +138,57 @@ const UpdatedReservationForm = () => {
         : 1;
       const totalCost = numberOfCages * costPerCagePerDay * totalDays;
 
-      // Create the transformed data for API
-      const transformedData = {
-        ownerName: formData.ownerName,
-        email: formData.email,
-        homeaddress: formData.address,
-        phoneNumber: formData.phoneNumber,
-        emergencyContact: formData.emergencyContact,
-        petCategory: formData.petCategory,
-        petName: formData.petName || formData.dogName || formData.catName || "", // Handle different pet names
-        petBreed:
-          formData.petBreed || formData.dogBreed || formData.catBreed || "", // Handle different pet breeds
-        age: formData.age,
-        bookingDetails: {
-          startDate: formData.bookingDetails.startDate,
-          endDate: formData.bookingDetails.endDate,
-          singleDay: formData.daycareDuration === "Single Day",
-          multipleDay: formData.daycareDuration === "Multiple Day",
-        },
-        cageBookings: formData.cages.map((cage) => ({
-          cageId: parseInt(cage.cageId),
-          morning: cage.morning,
-          afternoon: cage.afternoon,
-        })),
-        additionalDetails: formData.additionalDetails,
-        totalCost,
-      };
+    try {
+      // Calculate total cost
+      const numberOfCages = formData.selectedCageNumbers.length;
+      const isMultipleDay = formData.daycareDuration === "Multiple Day";
+      const costPerCagePerDay = 3000; // Example cost per cage per day
+      const totalDays = isMultipleDay
+        ? Math.ceil(
+            (new Date(formData.bookingDetails.endDate) -
+              new Date(formData.bookingDetails.startDate)) /
+              (1000 * 60 * 60 * 24)
+          ) + 1
+        : 1;
+      const totalCost = numberOfCages * costPerCagePerDay * totalDays;
 
-      await axios.post(
-        "http://localhost:8080/api/reservations",
-        transformedData
-      );
-      alert("Reservation submitted successfully!");
+    // Create the transformed data for API
+    const transformedData = {
+      ownerName: formData.ownerName,
+      email: formData.email,
+      homeaddress: formData.homeaddress,
+      phoneNumber: formData.phoneNumber,
+      emergencyContact: formData.emergencyContact,
+      petCategory: formData.petCategory,
+      petName: formData.petName,
+      petBreed: formData.petBreed,
+      age: formData.age,
+      bookingDetails: {
+        startDate: formData.bookingDetails.startDate,
+        endDate: formData.bookingDetails.endDate,
+        singleDay: formData.daycareDuration === "Single Day",
+        multipleDay: formData.daycareDuration === "Multiple Day",
+      },
+      cageBookings: formData.cages.map(cage => ({
+        cageId: parseInt(cage.cageId),
+        morning: cage.morning,
+        afternoon: cage.afternoon,
+      })),
 
-      // Navigate to the PaymentPage with the required data
-      navigate("/payment", {
-        state: { totalCost, bookingDetails: transformedData },
-      });
+      additionalDetails: formData.additionalDetails,
+    };
 
-      // Clear localStorage after successful submission
+    try {
+      await axios.post("http://localhost:8080/api/reservations", transformedData);
+      
+      console.log("Transformed Data:", transformedData);
+       // Clear localStorage after successful submission
       localStorage.removeItem("reservationData");
     } catch (error) {
       console.error("Error submitting reservation:", error);
+      alert(
+        "There was an error submitting your reservation. Please try again."
+      );
       alert(
         "There was an error submitting your reservation. Please try again."
       );
@@ -313,6 +322,12 @@ const UpdatedReservationForm = () => {
         {formData.daycareDuration === "Single Day" && (
           <>
             <InputField
+              label="Daycare Duration"
+              name="daycareDuration"
+              type="text"
+              value={formData.daycareDuration}
+              onChange={handleInputChange}
+              readOnly
               label="Daycare Duration"
               name="daycareDuration"
               type="text"

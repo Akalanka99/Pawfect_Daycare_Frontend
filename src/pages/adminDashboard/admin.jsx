@@ -22,14 +22,14 @@ const sharedLinks = (
     </li>
     <li>
       <Link to="/shop">
-        <FaCartShopping />  Shop 
+        <FaCartShopping /> Shop
       </Link>
     </li>
-    <li>
+    {/* <li>
       <Link to="/customer-support">
         <FaQuestionCircle /> Customer Support
       </Link>
-    </li>
+    </li> */}
   </>
 );
 
@@ -76,7 +76,11 @@ const AdminDashboard = () => {
             </div>
           </div>
           <div className="drawer-side">
-            <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
+            <label
+              htmlFor="my-drawer-2"
+              aria-label="close sidebar"
+              className="drawer-overlay"
+            ></label>
             <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
               <li>
                 <Link to="/dashboard" className="flex justify-start mb-3">
@@ -91,7 +95,7 @@ const AdminDashboard = () => {
                 </Link>
               </li>
               <li>
-              <Link to="/dashboard/manage-bookings">
+                <Link to="/dashboard/manage-bookings">
                   <FaShoppingBag /> Manage Bookings
                 </Link>
               </li>
@@ -110,6 +114,17 @@ const AdminDashboard = () => {
                   <FaUser /> All Users
                 </Link>
               </li>
+              <li className="mb-3">
+                <Link to="/dashboard/customer-support">
+                  <FaUser /> Customer Support
+                </Link>
+              </li>
+              <li>
+                <Link to="/customer-support">
+                  <FaQuestionCircle /> Customer Support
+                </Link>
+              </li>
+
               <hr />
               {sharedLinks}
             </ul>

@@ -11,7 +11,6 @@ import BookingSlot from "../pages/Reseverstion/BookingSlot";
 import PetInfo from "../pages/profile/PetInfo";
 import BookingHistory from "../pages/profile/BookingHistory";
 import ViewPayment from "../pages/Payment/ViewPayment";
-import PaymentPage from "../pages/Payment/PaymentPage";
 import Services from "../pages/Services";
 import SignInModal from "../components/Modal";
 import UpdatedReservationForm from "../pages/Reseverstion/UpdatedReservationForm";
@@ -20,10 +19,10 @@ import AdminDashboard from "../pages/dashboard/AdminDashboard";
 import Dashboard from "../pages/dashboard/Dashboard";
 import AddProduct from "../pages/dashboard/AddProduct";
 import ManageProducts from "../pages/dashboard/ManageProducts";
-import { Outlet } from "react-router-dom";
 import UpdateProduct from "../pages/dashboard/UpdateProduct";
 import Users from "../pages/dashboard/Users";
 import Managebooking from "../pages/dashboard/Managebooking";
+import CustomerSupport from "../pages/dashboard/CustomerSupport";
 
 const router = createBrowserRouter([
   {
@@ -78,10 +77,10 @@ const router = createBrowserRouter([
         path: "/bookinghistory",
         element: <BookingHistory />,
       },
-      {
-        path: "/payment",
-        element: <PaymentPage />,
-      },
+      //   {
+      //     path: "/payment",
+      //     element: <PaymentPage />,
+      //   },
       {
         path: "/updated-reservation",
         element: <UpdatedReservationForm />,
@@ -101,6 +100,7 @@ const router = createBrowserRouter([
     ],
   },
 
+  //admin routes
   // Admin Routes
   {
     path: "/admin-dashboard",
@@ -125,7 +125,7 @@ const router = createBrowserRouter([
       },
       {
         path: "update-product/:id",
-        element: <UpdateProduct />, // Make sure you have an UpdateProduct component
+        element: <UpdateProduct />,
         loader: async ({ params }) => {
           return fetch(`http://localhost:8080/api/product/${params.id}`);
         },
@@ -133,6 +133,10 @@ const router = createBrowserRouter([
       {
         path: "users",
         element: <Users />,
+      },
+      {
+        path: "customer-support", // Remove the duplicate route and keep this one
+        element: <CustomerSupport />,
       },
     ],
   },

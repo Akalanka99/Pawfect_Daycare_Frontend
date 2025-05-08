@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import axios from "axios";
+import { toast } from "react-toastify";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFacebook,
@@ -17,7 +19,7 @@ function ContactUs() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    message: "",
+    messageText: "",
   });
 
   const [formStatus, setFormStatus] = useState({
@@ -65,45 +67,58 @@ function ContactUs() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     // Form validation
-    if (!formData.name || !formData.email || !formData.message) {
-      setFormStatus({
-        submitted: false,
-        error: true,
-        message: "Please fill in all fields",
-      });
+    if (!formData.name || !formData.email || !formData.messageText) {
+      toast.error("Please fill in all fields");
       return;
     }
 
     // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(formData.email)) {
-      setFormStatus({
-        submitted: false,
-        error: true,
-        message: "Please enter a valid email address",
-      });
+      toast.error("Please enter a valid email address");
       return;
     }
 
-    // Handle form submission (replace with actual API call)
-    console.log("Form submitted:", formData);
+    try {
+      console.log("Sending request...");
 
-    // Show success message
-    setFormStatus({
-      submitted: true,
-      error: false,
-      message: "Thank you for your message! We'll get back to you soon.",
-    });
+      // API payload (data being sent)
+      const payload = {
+        name: formData.name,
+        email: formData.email,
+        messageText: formData.messageText,
+      };
 
-    // Reset form
-    setFormData({
-      name: "",
-      email: "",
-      message: "",
-    });
+      // Axios POST request with JSON body
+      const response = await axios.post(
+        "http://localhost:8080/api/messages/sendmessage",
+        payload, // Data sent in the body
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      console.log("Response:", response.data);
+
+      // Reset form after successful submission
+      setFormData({
+        name: "",
+        email: "",
+        messageText: "",
+      });
+
+      // Show success notification
+      toast.success("Message sent successfully!");
+    } catch (error) {
+      console.error("Error sending message:", error);
+      toast.error("Failed to send message. Please try again.");
+    }
   };
 
   const handleTestimonialChange = (e) => {
@@ -372,9 +387,11 @@ function ContactUs() {
                   </label>
                   <textarea
                     id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
+                    name="messageText"
+                    value={formData.messageText}
+                    onChange={(e) =>
+                      setFormData({ ...formData, messageText: e.target.value })
+                    }
                     rows="6"
                     className="w-full p-3 border border-gray-300 rounded focus:border-[#1d889d] focus:outline-none"
                     required

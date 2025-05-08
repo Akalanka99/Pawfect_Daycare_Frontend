@@ -133,7 +133,7 @@ const RegisterForm = () => {
             </p>
             <button
               onClick={handleGoogle}
-              className="mt-4 w-full bg-red-500 text-white py-2 rounded-md hover:bg-red-600 transition duration-300"
+              className="mt-4 w-full bg-red text-white py-2 rounded-md hover:bg-red-600 transition duration-300"
             >
               Sign in with Google
             </button>
