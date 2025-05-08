@@ -82,8 +82,8 @@ const UpdatedReservationForm = () => {
     setFormData((prevState) => ({
       ...prevState,
       [name]: checked
-        ? [...(prevState[name] || []), value]
-        : prevState[name]?.filter((item) => item !== value) || [],
+        ? [...(prevState[name] || []), value] // Ensure iterable
+        : prevState[name]?.filter((item) => item !== value) || [], // Filter if it's an array
     }));
   };
 
