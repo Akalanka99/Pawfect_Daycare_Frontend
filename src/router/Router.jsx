@@ -121,6 +121,9 @@ const router = createBrowserRouter([
           return fetch(`http://localhost:8080/api/product/${params.id}`);
         },
       },
+      { path: "manage-bookings",
+        element: <Managebooking />
+        },
       {
         path: "users",
         element: <Users />,
