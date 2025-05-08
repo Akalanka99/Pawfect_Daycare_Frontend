@@ -10,7 +10,6 @@ import BookingModal from "../pages/Reseverstion/BookingModal";
 import BookingSlot from "../pages/Reseverstion/BookingSlot";
 import PetInfo from "../pages/profile/PetInfo";
 import BookingHistory from "../pages/profile/BookingHistory";
-import ViewPayment from "../pages/Payment/ViewPayment";
 import PaymentPage from "../pages/Payment/PaymentPage";
 import Services from "../pages/Services";
 import SignInModal from "../components/Modal";
@@ -89,10 +88,6 @@ const router = createBrowserRouter([
       {
         path: "/shop",
         element: <Shop />,
-      },
-      {
-        path: "/viewpayment",
-        element: <ViewPayment />,
       },
       {
         path: "/services",

@@ -33,51 +33,47 @@ const UpdatedReservationForm = () => {
     serviceDuration: [],
     stayDuration: { from: "", to: "" },
     cages: [],
-    cageId:"",
+    cageId: "",
     additionalDetails: "",
   });
 
   useEffect(() => {
     const storedData = JSON.parse(localStorage.getItem("reservationData"));
     if (storedData) {
-      setFormData(prevState => ({
+      setFormData((prevState) => ({
         ...prevState,
-        ...storedData
+        ...storedData,
       }));
 
-      setFormData(prevState => ({
+      setFormData((prevState) => ({
         ...prevState,
-        cageId:storedData.cages[0].cageId // Replace with your updated value
+        cageId: storedData.cages[0].cageId, // Replace with your updated value
       }));
-      if(storedData.bookingDetails.multipleDay){
-        setFormData(prevState => ({
+      if (storedData.bookingDetails.multipleDay) {
+        setFormData((prevState) => ({
           ...prevState,
-          daycareDuration:"Multiple Day" // Replace with your updated value
+          daycareDuration: "Multiple Day", // Replace with your updated value
         }));
-      }else{
-        setFormData(prevState => ({
+      } else {
+        setFormData((prevState) => ({
           ...prevState,
-          daycareDuration:"Single Day" // Replace with your updated value
+          daycareDuration: "Single Day", // Replace with your updated value
         }));
-
       }
-}
- 
+    }
   }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    
+
     setFormData((prevState) => {
       const updatedData = { ...prevState, [name]: value };
-  
+
       // Auto-update Daycare Duration based on Stay Duration
-  
-  
+
       return updatedData;
     });
   };
-  
 
   const handleCheckboxChange = (e) => {
     const { name, value, checked } = e.target;
@@ -85,7 +81,7 @@ const UpdatedReservationForm = () => {
     setFormData((prevState) => ({
       ...prevState,
       [name]: checked
-         ? [...(prevState[name] || []), value] // Ensure iterable
+        ? [...(prevState[name] || []), value] // Ensure iterable
         : prevState[name]?.filter((item) => item !== value) || [], // Filter if it's an array
     }));
   };
@@ -98,7 +94,6 @@ const UpdatedReservationForm = () => {
   };
 
   const navigate = useNavigate();
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -114,38 +109,42 @@ const UpdatedReservationForm = () => {
       petName: formData.petName,
       petBreed: formData.petBreed,
       age: formData.age,
-      bookingDetails: {
-        startDate: formData.bookingDetails.startDate,
-        endDate: formData.bookingDetails.endDate,
-        singleDay: formData.daycareDuration === "Single Day",
-        multipleDay: formData.daycareDuration === "Multiple Day",
-      },
-      cageBookings: formData.cages.map(cage => ({
+      bookingDetails: formData.bookingDetails,
+      cageBookings: formData.cages.map((cage) => ({
         cageId: parseInt(cage.cageId),
-        morning: cage.morning,
-        afternoon: cage.afternoon,
+        morning: formData.bookingDetails.serviceDuration === "Morning",
+        afternoon: formData.bookingDetails.serviceDuration === "Afternoon",
+        fullDay: formData.bookingDetails.serviceDuration === "Full Day",
       })),
-
       additionalDetails: formData.additionalDetails,
     };
 
     try {
-      await axios.post("http://localhost:8080/api/reservations", transformedData);
-      
-      console.log("Transformed Data:", transformedData);
-       // Clear localStorage after successful submission
-      localStorage.removeItem("reservationData");
-      alert("Booking submitted successfully!");
-      navigate("/");
+      await axios.post(
+        "http://localhost:8080/api/reservations",
+        transformedData
+      );
 
+      console.log("Transformed Data:", transformedData);
+      // Clear localStorage after successful submission
+      localStorage.removeItem("reservationData");
+      alert("Booking submitted successfully!"); // Pass data to PaymentPage
+      navigate("/payment", {
+        state: {
+          totalCost: formData.totalCost, // Already calculated in BookingSlot
+          bookingDetails: formData.bookingDetails,
+          numberOfCages: formData.cages.length, // Pass the number of cages
+        },
+      });
     } catch (error) {
       console.error("Error submitting reservation:", error);
-      alert("There was an error submitting your reservation. Please try again.");
+      alert(
+        "There was an error submitting your reservation. Please try again."
+      );
     }
   };
 
   return (
-   
     <div className="max-w-2xl mx-auto p-6 bg-white shadow-lg rounded-lg">
       <h1 className="text-center font-sans font-bold text-2xl mb-4">
         PawFect Reservation
@@ -227,7 +226,6 @@ const UpdatedReservationForm = () => {
             />
           </>
         )}
-
         {formData.petCategory?.toLowerCase() === "cat" && (
           <>
             <InputField
@@ -248,7 +246,6 @@ const UpdatedReservationForm = () => {
             />
           </>
         )}
-
         <InputField
           label="Age"
           name="age"
@@ -257,7 +254,6 @@ const UpdatedReservationForm = () => {
           onChange={handleInputChange}
           required
         />
-
         <InputField
           label="Daycare Duration"
           name="daycareDuration"
@@ -267,44 +263,15 @@ const UpdatedReservationForm = () => {
           placeholder="Enter 'Single Day' or 'Multiple Day'"
           required
         />
-
-        {/* Duration Details */}
-        {formData.daycareDuration === "Single Day" && (
-          <>
-            <InputField
-               label="Daycare Duration"
-               name="daycareDuration"
-               type="text"
-               value={formData.daycareDuration}
-               onChange={handleInputChange}
-               readOnly
-            />
-            {/* Service Duration */}
-            <div className="mb-4 flex justify-between items-center">
-              <label className="w-1/3 text-sm font-medium text-gray-700">
-                Service Duration
-              </label>
-              <div className="w-2/3">
-                {["Full Time", "Morning", "Afternoon"].map((duration) => (
-                  <div key={duration}>
-                    <label>
-                      <input
-                        type="checkbox"
-                        name="serviceDuration"
-                        value={duration}
-                        onChange={handleCheckboxChange}
-                      />
-                      <span className="ml-2">{duration}</span>
-                    </label>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </>
-        )}
-
-        
-
+        <InputField
+          label="Service Duration"
+          name="serviceDuration"
+          type="text"
+          value={formData.bookingDetails?.serviceDuration || "N/A"}
+          onChange={handleInputChange}
+          placeholder="Enter 'Single Day' or 'Multiple Day'"
+          required
+        />
         <InputField
           label="Cage Number"
           name="cageNo"
@@ -313,44 +280,6 @@ const UpdatedReservationForm = () => {
           onChange={handleInputChange}
           required
         />
-
-        {/* Optional Grooming Services */}
-        {/* <div className="mb-4 flex justify-between items-center">
-          <label className="w-1/3 text-sm font-medium text-gray-700">
-            Optional Grooming Services
-          </label>
-          <div className="w-2/3">
-            {["Nail Trim", "Bath", "Hair Trim", "Health check-ups"].map(
-              (service) => (
-                <div key={service}>
-                  <label>
-                    <input
-                      type="checkbox"
-                      name="groomingServices"
-                      value={service}
-                      onChange={handleCheckboxChange}
-                    />
-                    <span className="ml-2">{service}</span>
-                  </label>
-                </div>
-              )
-            )}
-          </div>
-        </div> */}
-
-        {/* File Upload */}
-        
-        {/* <div className="mb-4 flex justify-between items-center">
-          <label className="w-1/3 text-sm font-medium text-gray-700">
-            Vaccination Records
-          </label>
-          <input
-            type="file"
-            name="vaccinationRecords"
-            className="w-2/3"
-            onChange={handleFileUpload}
-          />
-        </div> */}
 
         <InputField
           label="Additional Care Details"
