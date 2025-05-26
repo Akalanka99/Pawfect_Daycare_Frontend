@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../components/context/Authprovider";
-
+const API_URL=process.env.VITE_API_URL;
 
 const ProfilePage = () => {
   const { user } = useContext(AuthContext); // Access user data from context
@@ -8,7 +8,7 @@ const ProfilePage = () => {
 
   useEffect(() => {
     if (user?.uid) {
-      fetch(`http://localhost:8080/api/user/${user.uid}`)
+      fetch(`${API_URL}/api/user/${user.uid}`)
         .then((response) => response.json())
         .then((data) => {
           if (data) {

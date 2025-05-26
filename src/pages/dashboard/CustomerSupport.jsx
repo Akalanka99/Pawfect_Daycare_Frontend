@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+const API_URL = process.env.VITE_API_URL;
 
 function CustomerSupport() {
   const [messages, setMessages] = useState([]);
@@ -14,8 +16,8 @@ function CustomerSupport() {
         setLoading(true);
         const endpoint =
           filter === "unread"
-            ? "http://localhost:8080/api/messages/unread"
-            : "http://localhost:8080/api/messages/getmessages";
+            ? `${API_URL}/api/messages/unread`
+            : `${API_URL}/api/messages/getmessages`;
 
         const response = await axios.get(endpoint);
         setMessages(response.data);
@@ -33,7 +35,7 @@ function CustomerSupport() {
 
   const markAsRead = async (messageId) => {
     try {
-      await axios.put(`http://localhost:8080/api/messages/${messageId}/read`);
+      await axios.put(`${API_URL}/api/messages/${messageId}/read`);
       setMessages(
         messages.map((msg) =>
           msg.id === messageId ? { ...msg, read: true } : msg
@@ -59,7 +61,10 @@ function CustomerSupport() {
             type="radio"
             value="all"
             checked={filter === "all"}
-            onChange={() => setFilter("all")}
+            onChange={() => {
+              setSelectedMessage(null);
+              setFilter("all");
+            }}
             className="mr-2"
           />
           All Messages
@@ -69,7 +74,10 @@ function CustomerSupport() {
             type="radio"
             value="unread"
             checked={filter === "unread"}
-            onChange={() => setFilter("unread")}
+            onChange={() => {
+              setFilter("unread");
+              setSelectedMessage(null); // Reset selected message when filtering
+            }}
             className="mr-2"
           />
           Unread Messages
@@ -179,6 +187,7 @@ function CustomerSupport() {
             <p className="text-gray-500">Select a message to view details</p>
           )}
         </div>
+        <ToastContainer />
       </div>
     </div>
   );
