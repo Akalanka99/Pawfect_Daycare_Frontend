@@ -102,12 +102,18 @@ const UpdatedReservationForm = () => {
     const transformedData = {
       ownerName: formData.ownerName,
       email: formData.email,
-      homeaddress: formData.homeaddress,
+      address: formData.address,
       phoneNumber: formData.phoneNumber,
       emergencyContact: formData.emergencyContact,
       petCategory: formData.petCategory,
-      petName: formData.petName,
-      petBreed: formData.petBreed,
+      dogName:
+        formData.petCategory.toLowerCase() === "dog" ? formData.petName : "",
+      dogBreed:
+        formData.petCategory.toLowerCase() === "dog" ? formData.petBreed : "",
+      catName:
+        formData.petCategory.toLowerCase() === "cat" ? formData.petName : "",
+      catBreed:
+        formData.petCategory.toLowerCase() === "cat" ? formData.petBreed : "",
       age: formData.age,
       bookingDetails: formData.bookingDetails,
       cageBookings: formData.cages.map((cage) => ({
@@ -175,7 +181,7 @@ const UpdatedReservationForm = () => {
           label="Home Address"
           name="address"
           type="text"
-          value={formData.homeaddress}
+          value={formData.address}
           onChange={handleInputChange}
           required
         />
