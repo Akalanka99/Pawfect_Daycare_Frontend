@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-const API_URL=process.env.VITE_API_URL;
-
+const API_URL = process.env.VITE_API_URL;
 
 const InputField = ({ label, name, value, onChange, ...props }) => (
   <div className="mb-4 flex justify-between items-center">
@@ -129,7 +128,7 @@ const UpdatedReservationForm = () => {
 
     try {
       await axios.post(
-        `${API_URL}/api/reservations`,
+        "http://localhost:8080/api/reservations",
         transformedData
       );
 

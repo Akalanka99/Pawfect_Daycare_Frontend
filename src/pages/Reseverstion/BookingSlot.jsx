@@ -4,8 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { DateRange } from "react-date-range";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
-const API_URL=process.env.VITE_API_URL;
-
+const API_URL = process.env.VITE_API_URL;
 
 const BookingSlot = () => {
   const location = useLocation();
@@ -30,7 +29,7 @@ const BookingSlot = () => {
     try {
       // Get availability for the selected date
       const response = await axios.get(
-        `${API_URL}/api/cage-bookings/availability`,
+        `http://localhost:8080/api/cage-bookings/availability`,
         {
           params: {
             date: formatDate(dateRange[0].startDate),
