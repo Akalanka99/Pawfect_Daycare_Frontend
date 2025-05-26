@@ -27,9 +27,12 @@ const BookingSlot = () => {
   const fetchCageAvailability = async () => {
     try {
       // Get availability for the selected date
-      const response = await axios.get(`http://localhost:8080/api/cage-bookings/availability`, {
-        params: {
-          date: formatDate(dateRange[0].startDate)
+      const response = await axios.get(
+        `http://localhost:8080/api/cage-bookings/availability`,
+        {
+          params: {
+            date: formatDate(dateRange[0].startDate),
+          },
         }
       });
       

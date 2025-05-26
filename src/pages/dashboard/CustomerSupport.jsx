@@ -131,6 +131,49 @@ function CustomerSupport() {
                 </label>
                 <p>{new Date(selectedMessage.createdAt).toLocaleString()}</p>
               </div>
+
+              {/* Reply Form */}
+              <div className="mt-6">
+                <h3 className="text-xl font-semibold mb-4">
+                  Reply to Customer
+                </h3>
+                <form
+                  onSubmit={async (e) => {
+                    e.preventDefault();
+                    const replyMessage = e.target.replyMessage.value;
+                    try {
+                      await axios.post(
+                        "http://localhost:8080/api/messages/reply",
+                        {
+                          email: selectedMessage.email,
+                          message: replyMessage,
+                        }
+                      );
+                      //alert("Reply sent successfully!");
+                      toast.success("Reply email sent succesfully!");
+                      e.target.reset();
+                    } catch (error) {
+                      console.error("Error sending reply:", error);
+                      toast.error("Failed to send reply. Please try again.");
+                      //alert("Failed to send reply. Please try again.");
+                    }
+                  }}
+                >
+                  <textarea
+                    name="replyMessage"
+                    rows="4"
+                    className="w-full border rounded-lg p-2 mb-4"
+                    placeholder="Type your reply here..."
+                    required
+                  ></textarea>
+                  <button
+                    type="submit"
+                    className="bg-blue-500 text-white px-4 py-2 rounded-lg"
+                  >
+                    Send Reply
+                  </button>
+                </form>
+              </div>
             </div>
           ) : (
             <p className="text-gray-500">Select a message to view details</p>
