@@ -1,9 +1,10 @@
 import axios from 'axios'
 import React from 'react'
+const API_URL=process.env.VITE_API_URL;
 
 
 const axiosPublic =  axios.create({
-    baseURL: 'http://localhost:8080',
+    baseURL: API_URL,
   })
 
 const useAxiosPublic = () => {

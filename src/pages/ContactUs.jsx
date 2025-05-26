@@ -14,6 +14,8 @@ import {
   faClock,
   faStar,
 } from "@fortawesome/free-solid-svg-icons";
+const API_URL=process.env.VITE_API_URL;
+
 
 function ContactUs() {
   const [formData, setFormData] = useState({
@@ -95,7 +97,7 @@ function ContactUs() {
 
       // Axios POST request with JSON body
       const response = await axios.post(
-        "http://localhost:8080/api/messages/sendmessage",
+        `${API_URL}/api/messages/sendmessage`,
         payload, // Data sent in the body
         {
           headers: {

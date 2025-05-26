@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+const API_URL=process.env.VITE_API_URL;
 
 const Shop = () => {
   const [shop, setShop] = useState([]);
@@ -9,7 +10,7 @@ const Shop = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:8080/api/product"); // Adjust the URL based on your backend setup
+        const response = await fetch(`${API_URL}/api/product`); // Adjust the URL based on your backend setup
         const data = await response.json();
         setShop(data);
         setFilteredItems(data);

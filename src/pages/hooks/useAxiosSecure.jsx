@@ -1,9 +1,11 @@
 import axios from "axios";
 import {useNavigate} from "react-router-dom"
 import useAuth from "./useAuth";
+const API_URL=process.env.VITE_API_URL;
+
 
 const axiosSecure = axios.create({
-    baseURL: 'http://localhost:8080',
+    baseURL: API_URL,
 })
 
 const useAxiosSecure = () => {
